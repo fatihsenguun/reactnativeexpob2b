@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { useRouter } from 'expo-router';
+
+export default function LoginScreen() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  return (
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+      style={styles.container}
+    >
+      <View style={styles.formContainer}>
+        {/* Branding */}
+        <Text style={styles.title}>TradeFlow</Text>
+        <Text style={styles.subtitle}>B2B Marketplace</Text>
+
+        {/* Inputs */}
+        <TextInput
+          style={styles.input}
+          placeholder="Email Address"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+
+        {/* Login Button */}
+        <TouchableOpacity style={styles.primaryButton} onPress={() => console.log('Login clicked')}>
+          <Text style={styles.primaryButtonText}>Sign In</Text>
+        </TouchableOpacity>
+
+        {/* Navigation to Register */}
+        <TouchableOpacity 
+          style={styles.secondaryButton} 
+          onPress={() => router.push('/(auth)/register')}
+        >
+          <Text style={styles.secondaryButtonText}>Don't have an account? Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#ffffff' },
+  formContainer: { flex: 1, justifyContent: 'center', paddingHorizontal: 30 },
+  title: { fontSize: 36, fontWeight: 'bold', color: '#520000', textAlign: 'center' },
+  subtitle: { fontSize: 16, color: '#666', textAlign: 'center', marginBottom: 40 },
+  input: {
+    backgroundColor: '#f5f5f5',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#eee',
+    fontSize: 16,
+  },
+  primaryButton: {
+    backgroundColor: '#520000',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  primaryButtonText: { color: '#ffffff', fontSize: 16, fontWeight: 'bold' },
+  secondaryButton: { marginTop: 20, alignItems: 'center' },
+  secondaryButtonText: { color: '#520000', fontSize: 14, fontWeight: '600' },
+});
