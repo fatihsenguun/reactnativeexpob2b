@@ -41,3 +41,29 @@ app-example
 # generated native folders
 /ios
 /android
+
+# --- CUSTOM ADDITIONS FOR TRADEFLOW ---
+
+# 1. Environment Variables (CRITICAL)
+# You already have .env*.local, but you must ignore the main .env file too!
+# This prevents your backend API keys and URLs from leaking to GitHub.
+.env
+
+# 2. IDE & Editor Folders
+# Prevents your personal VS Code or WebStorm settings from overriding your team's
+.vscode/
+.idea/
+
+# 3. Firebase & Push Notifications (Future-Proofing)
+# When you eventually add push notifications for "Order Shipped" alerts,
+# these Google configuration files contain sensitive app keys.
+google-services.json
+GoogleService-Info.plist
+
+# 4. Expo EAS Build output
+# If you build the app to share with your friends/testers, it outputs heavy .apk or .tar.gz files here
+*.apk
+*.aab
+*.ipa
+*.tar.gz
+build/
