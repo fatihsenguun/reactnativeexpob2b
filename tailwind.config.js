@@ -30,6 +30,10 @@ module.exports = {
         "on-surface-variant": "#454652", 
         outline: "#767683",             
         "outline-variant": "#c6c5d4",
+        
+        // --- Yeni Eklenen Seller (Satıcı) Renkleri ---
+        seller: "#047857",               // Butonlar, yazılar ve ikonlar için
+        "seller-surface": "#ecfdf5",     // Arka plan için
       },
       fontFamily: {
         headline: ["Manrope", "sans-serif"],
