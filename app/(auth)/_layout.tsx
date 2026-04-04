@@ -10,7 +10,7 @@ export default function AuthLayout() {
       <Stack.Screen name="login" options={{ headerShown: false }} />
       
       {/* Register screen will have a back button to go back to login */}
-      <Stack.Screen name="register" options={{ title: 'Create Account' }} />
+      <Stack.Screen name="register" options={{ headerShown: false  }} />
     </Stack>
   );
 }

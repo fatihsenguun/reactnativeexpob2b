@@ -27,16 +27,14 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // --- TAILWIND CONFIG'DEN GELEN DİNAMİK SINIFLAR VE RENKLER ---
-
+  // --- TAILWIND CONFIG DİNAMİK SINIFLARI ---
   const bgClass = isBuyer ? 'bg-buyer-surface' : 'bg-seller-surface';
   const tabContainerBg = isBuyer ? 'bg-buyer-surface-container-low' : 'bg-seller-surface-container-low';
   const buttonBg = isBuyer ? 'bg-buyer-primary' : 'bg-seller-primary';
   
   const textPrimaryClass = isBuyer ? 'text-buyer-primary' : 'text-seller-primary';
   
-
-  const primaryHex = isBuyer ? '#004ac6' : '#3525cd'; // buyer-primary vs seller-primary
+  const primaryHex = isBuyer ? '#004ac6' : '#3525cd'; 
   const inactiveHex = isBuyer ? '#c3c6d7' : '#c7c4d8';
   const shadowTint = isBuyer ? '#151c27' : '#131b2e'; 
   
@@ -81,7 +79,6 @@ export default function LoginScreen() {
     }
   };
 
-  // DESIGN.md: "Ambient Shadow" kuralına uygun aktif sekme stili
   const activeTabStyle = {
     elevation: 2,
     shadowColor: shadowTint, 
@@ -97,6 +94,7 @@ export default function LoginScreen() {
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} className="px-6 py-12">
         
+        {/* LOGO */}
         <View className="items-center justify-center mb-10">
           <Image 
             source={require('../../src/assets/logo1.png')} 
@@ -105,6 +103,7 @@ export default function LoginScreen() {
           />
         </View>
 
+        {/* BAŞLIK */}
         <View className="mb-8 items-center text-center">
           <Text className={`text-3xl font-bold mb-2 ${textPrimaryClass}`}>
             {welcomeTitle}
@@ -114,6 +113,7 @@ export default function LoginScreen() {
           </Text>
         </View>
 
+        {/* SEKME SEÇİCİ */}
         <View className={`p-1 rounded-xl flex-row mb-8 ${tabContainerBg}`}>
           <Pressable 
             onPress={() => setIsBuyer(true)}
@@ -135,6 +135,7 @@ export default function LoginScreen() {
           </Pressable>
         </View>
 
+        {/* FORM */}
         <View className="space-y-6">
           <CustomInput
             label="Corporate Email"
@@ -176,7 +177,7 @@ export default function LoginScreen() {
           <Pressable 
             className={`w-full py-4 rounded-xl mt-4 items-center justify-center active:opacity-80 ${buttonBg}`}
             style={{ 
-              shadowColor: shadowTint, // DESIGN.md Gölge Kuralı
+              shadowColor: shadowTint, 
               shadowOpacity: 0.08, 
               shadowRadius: 24, 
               shadowOffset: { width: 0, height: 8 }, 
@@ -189,23 +190,17 @@ export default function LoginScreen() {
 
         </View>
 
+        {/* ALT LİNKLER - TEK KAYIT BUTONU */}
         <View className="mt-10 pt-8 border-t border-slate-200/60 items-center">
           <Text className="text-slate-500 font-medium mb-4 text-sm">New to B2B?</Text>
           
-          <View className="flex-col w-full gap-3">
+          <View className="w-full">
             <Pressable 
               className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-slate-200 bg-white active:opacity-80"
               onPress={() => router.push('/(auth)/register')}
             >
-              <MaterialIcons name="shopping-bag" size={18} color="#004ac6" />
-              <Text className="font-bold text-sm text-[#004ac6]">Register as a Buyer</Text>
-            </Pressable>            
-            <Pressable 
-              className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-slate-200 bg-white active:opacity-80"
-              onPress={() => router.push('/(auth)/register')}
-            >
-              <MaterialIcons name="store" size={18} color="#3525cd" />
-              <Text className="font-bold text-sm text-[#3525cd]">Register as a Seller</Text>
+              <MaterialIcons name="person-add" size={18} color={primaryHex} />
+              <Text className={`font-bold text-sm ${textPrimaryClass}`}>Create an Account</Text>
             </Pressable>
           </View>
         </View>

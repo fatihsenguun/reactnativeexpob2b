@@ -18,7 +18,7 @@ export default function CustomInput({
   onRightIconPress,
   rightLabel,
   onRightLabelPress,
-  ...textInputProps // passes down value, onChangeText, placeholder, etc.
+  ...textInputProps 
 }: CustomInputProps) {
   return (
     <View className="space-y-2 mt-4">
@@ -34,11 +34,11 @@ export default function CustomInput({
       </View>
       <View className="relative justify-center">
         <View className="absolute left-4 z-10">
-          <MaterialIcons name={iconName} size={20} color="#767683" />
+          <MaterialIcons name={iconName} size={20} color="#adadae" />
         </View>
         <TextInput
           className="w-full pl-12 pr-12 py-4 bg-surface-container-highest rounded-xl text-on-surface font-medium"
-          placeholderTextColor="#767683"
+          placeholderTextColor="#adadae"
           {...textInputProps}
         />
         {rightIconName && (
