@@ -27,11 +27,18 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // --- B2B DESIGN SYSTEM RENKLERİ (tailwind.config.js'den birebir alındı) ---
-  const themeColor = isBuyer ? '#000666' : '#047857'; // primary vs seller
-  const bgColor = isBuyer ? '#f7f9fc' : '#ecfdf5'; // surface vs seller-surface
-  const inactiveTextColor = '#767683'; // outline
-  const shadowTint = '#191c1e'; // on-surface (DESIGN.md Gölge Kuralı)
+  // --- TAILWIND CONFIG'DEN GELEN DİNAMİK SINIFLAR VE RENKLER ---
+
+  const bgClass = isBuyer ? 'bg-buyer-surface' : 'bg-seller-surface';
+  const tabContainerBg = isBuyer ? 'bg-buyer-surface-container-low' : 'bg-seller-surface-container-low';
+  const buttonBg = isBuyer ? 'bg-buyer-primary' : 'bg-seller-primary';
+  
+  const textPrimaryClass = isBuyer ? 'text-buyer-primary' : 'text-seller-primary';
+  
+
+  const primaryHex = isBuyer ? '#004ac6' : '#3525cd'; // buyer-primary vs seller-primary
+  const inactiveHex = isBuyer ? '#c3c6d7' : '#c7c4d8';
+  const shadowTint = isBuyer ? '#151c27' : '#131b2e'; 
   
   const welcomeTitle = isBuyer ? 'Buyer Account' : 'Seller Dashboard';
 
@@ -74,9 +81,8 @@ export default function LoginScreen() {
     }
   };
 
-  // DESIGN.md: "Ambient Shadow" Kuralına uygun sekme stili
+  // DESIGN.md: "Ambient Shadow" kuralına uygun aktif sekme stili
   const activeTabStyle = {
-    backgroundColor: '#ffffff', // surface-container-lowest
     elevation: 2,
     shadowColor: shadowTint, 
     shadowOpacity: 0.04,
@@ -87,8 +93,7 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
-      className="flex-1"
-      style={{ backgroundColor: bgColor }}
+      className={`flex-1 ${bgClass}`}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} className="px-6 py-12">
         
@@ -101,33 +106,30 @@ export default function LoginScreen() {
         </View>
 
         <View className="mb-8 items-center text-center">
-          <Text 
-            className="text-3xl font-bold mb-2"
-            style={{ color: themeColor }}
-          >
+          <Text className={`text-3xl font-bold mb-2 ${textPrimaryClass}`}>
             {welcomeTitle}
           </Text>
-          <Text className="text-on-secondary-container font-medium text-center">
+          <Text className="text-sm font-medium text-center text-slate-500">
             Please enter your credentials to continue
           </Text>
         </View>
 
-        <View className="bg-surface-container-low p-1 rounded-xl flex-row mb-8">
+        <View className={`p-1 rounded-xl flex-row mb-8 ${tabContainerBg}`}>
           <Pressable 
             onPress={() => setIsBuyer(true)}
-            className="flex-1 py-3 px-4 rounded-lg items-center active:opacity-80"
+            className={`flex-1 py-3 px-4 rounded-lg items-center active:opacity-80 ${isBuyer ? 'bg-white' : ''}`}
             style={isBuyer ? activeTabStyle : {}}
           >
-            <Text className="text-sm font-bold" style={{ color: isBuyer ? themeColor : inactiveTextColor }}>
+            <Text className={`text-sm font-bold ${isBuyer ? textPrimaryClass : 'text-slate-500'}`}>
               Buyer Account
             </Text>
           </Pressable>
           <Pressable 
             onPress={() => setIsBuyer(false)}
-            className="flex-1 py-3 px-4 rounded-lg items-center active:opacity-80"
+            className={`flex-1 py-3 px-4 rounded-lg items-center active:opacity-80 ${!isBuyer ? 'bg-white' : ''}`}
             style={!isBuyer ? activeTabStyle : {}}
           >
-            <Text className="text-sm font-bold" style={{ color: !isBuyer ? themeColor : inactiveTextColor }}>
+            <Text className={`text-sm font-bold ${!isBuyer ? textPrimaryClass : 'text-slate-500'}`}>
               Seller Portal
             </Text>
           </Pressable>
@@ -164,20 +166,19 @@ export default function LoginScreen() {
             <MaterialIcons 
               name={rememberMe ? "check-box" : "check-box-outline-blank"} 
               size={22} 
-              color={rememberMe ? themeColor : "#c6c5d4"} 
+              color={rememberMe ? primaryHex : inactiveHex} 
             />
-            <Text className="text-sm font-medium text-on-surface-variant">
+            <Text className="text-sm font-medium text-slate-600">
               Remember this device for 30 days
             </Text>
           </Pressable>
 
           <Pressable 
-            className="w-full py-4 rounded-xl mt-4 items-center justify-center active:opacity-80"
+            className={`w-full py-4 rounded-xl mt-4 items-center justify-center active:opacity-80 ${buttonBg}`}
             style={{ 
-              backgroundColor: themeColor, 
-              shadowColor: shadowTint, // DESIGN.md kuralı
-              shadowOpacity: 0.06, 
-              shadowRadius: 32, 
+              shadowColor: shadowTint, // DESIGN.md Gölge Kuralı
+              shadowOpacity: 0.08, 
+              shadowRadius: 24, 
               shadowOffset: { width: 0, height: 8 }, 
               elevation: 4 
             }}
@@ -188,23 +189,23 @@ export default function LoginScreen() {
 
         </View>
 
-        <View className="mt-10 pt-8 border-t border-surface-container-high items-center">
-          <Text className="text-outline font-medium mb-4">New to B2B?</Text>
+        <View className="mt-10 pt-8 border-t border-slate-200/60 items-center">
+          <Text className="text-slate-500 font-medium mb-4 text-sm">New to B2B?</Text>
           
           <View className="flex-col w-full gap-3">
             <Pressable 
-              className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-outline-variant/20 bg-surface-container-lowest active:opacity-80"
+              className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-slate-200 bg-white active:opacity-80"
               onPress={() => router.push('/(auth)/register')}
             >
-              <MaterialIcons name="shopping-bag" size={18} color="#000666" />
-              <Text className="font-bold text-sm" style={{ color: '#000666' }}>Register as a Buyer</Text>
+              <MaterialIcons name="shopping-bag" size={18} color="#004ac6" />
+              <Text className="font-bold text-sm text-[#004ac6]">Register as a Buyer</Text>
             </Pressable>            
             <Pressable 
-              className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-outline-variant/20 bg-surface-container-lowest active:opacity-80"
+              className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-slate-200 bg-white active:opacity-80"
               onPress={() => router.push('/(auth)/register')}
             >
-              <MaterialIcons name="store" size={18} color="#047857" />
-              <Text className="font-bold text-sm" style={{ color: '#047857' }}>Register as a Seller</Text>
+              <MaterialIcons name="store" size={18} color="#3525cd" />
+              <Text className="font-bold text-sm text-[#3525cd]">Register as a Seller</Text>
             </Pressable>
           </View>
         </View>
