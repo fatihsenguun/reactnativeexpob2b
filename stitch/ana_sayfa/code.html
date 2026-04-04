@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PROCURA | Local B2B Wholesale</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-container": "#1a237e",
+                        "surface-container": "#eceef1",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e6e8eb",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-dim": "#d8dadd",
+                        "inverse-primary": "#bdc2ff",
+                        "surface-container-highest": "#e0e3e6",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "primary": "#000666",
+                        "outline": "#767683",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c6c5d4",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#cfe6f2",
+                        "surface-tint": "#4c56af",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "tertiary-container": "#5c1800",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#e17c5a",
+                        "background": "#f7f9fc",
+                        "on-secondary-fixed": "#071e27",
+                        "secondary": "#4c616c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#454652",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f7f9fc",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#380b00",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "surface-bright": "#f7f9fc",
+                        "surface-variant": "#e0e3e6",
+                        "on-primary-fixed": "#000767",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f2f4f7",
+                        "primary-fixed": "#e0e0ff",
+                        "on-secondary-container": "#526772",
+                        "on-primary-container": "#8690ee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+        .glass-nav { background: rgba(247, 249, 252, 0.8); backdrop-filter: blur(20px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl z-50">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-blue-900 dark:text-blue-400">grid_view</span>
+</button>
+<span class="text-xl font-black tracking-tighter text-blue-900 dark:text-blue-100">PROCURA</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-blue-900 dark:text-blue-400">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Search Bar Section -->
+<section class="mb-8">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline/70" placeholder="Search wholesale products, suppliers, or SKUs..." type="text"/>
+</div>
+</section>
+<!-- Category Grid (Editorial Style) -->
+<section class="mb-10">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-2xl font-extrabold text-primary tracking-tight">Supply Categories</h2>
+<p class="text-sm text-secondary font-medium">Browse by industry segment</p>
+</div>
+<button class="text-primary font-semibold text-sm hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<!-- Electronics -->
+<div class="group cursor-pointer bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center transition-all hover:bg-primary hover:text-on-primary">
+<span class="material-symbols-outlined text-3xl mb-3">devices</span>
+<span class="font-bold text-sm">Electronics</span>
+</div>
+<!-- Textiles -->
+<div class="group cursor-pointer bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center transition-all hover:bg-primary hover:text-on-primary">
+<span class="material-symbols-outlined text-3xl mb-3">checkroom</span>
+<span class="font-bold text-sm">Textiles</span>
+</div>
+<!-- Food -->
+<div class="group cursor-pointer bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center transition-all hover:bg-primary hover:text-on-primary">
+<span class="material-symbols-outlined text-3xl mb-3">restaurant</span>
+<span class="font-bold text-sm">Food &amp; Bev</span>
+</div>
+<!-- Office Supplies -->
+<div class="group cursor-pointer bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center transition-all hover:bg-primary hover:text-on-primary">
+<span class="material-symbols-outlined text-3xl mb-3">print</span>
+<span class="font-bold text-sm">Office</span>
+</div>
+<!-- Industrial Tools -->
+<div class="group cursor-pointer bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center transition-all hover:bg-primary hover:text-on-primary">
+<span class="material-symbols-outlined text-3xl mb-3">construction</span>
+<span class="font-bold text-sm">Industrial</span>
+</div>
+</div>
+</section>
+<!-- Flash Sale Section (Asymmetric Bento) -->
+<section class="mb-12">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<h2 class="text-2xl font-extrabold text-primary tracking-tight">Flash Wholesale Deals</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Large Feature -->
+<div class="md:col-span-2 relative overflow-hidden rounded-2xl aspect-[16/9] md:aspect-auto group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="industrial warehouse interior with shelves full of organized boxes under bright professional lighting and cool blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkni_87YOlHUHPpCpSXaD0L2yrL7ZCwehn0s1yAOUyw1pxNfeT_AM1sfEP831jRh_aXU8I2-p0kZ-1FZpjIJ6KgzXQxyIO0xeGgIaikKS1F-e4bjC9Xcic9x8PSKLNugWRiIG5zkd2GyuyGo3Igj8XZDsN6hpZ7h3-FhNymTAiylvN9ljezZ65i0idAqMfaEyktYY6yO7eYbAzNheCBEiWVeTLB62q3818JIMH0yc65rzLbKMe-M8dB4nUKoz4AYwfDY1RLRp6SQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block">Ends in 04:22:10</span>
+<h3 class="text-3xl font-black text-white mb-2">Industrial Toolkits</h3>
+<p class="text-blue-100 mb-6 max-w-md">Premium grade construction kits at bulk clearance prices. Verified supply chain.</p>
+<button class="bg-white text-primary px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-blue-50 transition-colors">
+                            Secure Bulk Pricing <span class="material-symbols-outlined">trending_flat</span>
+</button>
+</div>
+</div>
+<!-- Small Deal -->
+<div class="space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10 flex flex-col h-full">
+<img class="w-full h-32 object-cover rounded-xl mb-4" data-alt="stacks of high-quality electronics components on a clean white surface with sharp shadows and minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbnvoSuPnxDmvETZxXaC-qBeb3tH7DgPNO-giypxtJ2pmzUrwC0q0ZnF2WnltHC3RlXGgXjXZMcWacC_yqPy57Y8NK6O0O93TXXjv5QhQ8o--xMdGjuXnRgo3B2XipssDInrssZPANrPJ0WFM83XnGCF08ESOq1NQx_GikCvb8DwxRkvZxoKKT6-nzKgbg7o-ZOWA0z2HdXwhUmUpG4p1jDkuoohugxYsbrdhanQr0OcHgjbNjGVEUI12AzQtezH_KLPtaOBX1TQ"/>
+<div class="flex-grow">
+<h4 class="font-bold text-primary mb-1">LED Micro-Panels</h4>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-2xl font-black text-on-surface">$12.40</span>
+<span class="text-xs text-outline line-through">$18.90</span>
+</div>
+<p class="text-xs text-secondary mb-4">MOQ: 500 Units</p>
+</div>
+<div class="w-full bg-secondary-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<span class="text-[10px] font-bold text-primary mt-2 uppercase tracking-tighter">85% claimed</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Wholesalers -->
+<section class="mb-12">
+<h2 class="text-2xl font-extrabold text-primary tracking-tight mb-6">Top Rated Wholesalers</h2>
+<div class="flex gap-6 overflow-x-auto pb-4 hide-scrollbar">
+<!-- Supplier 1 -->
+<div class="min-w-[280px] bg-surface-container-low rounded-2xl p-6 transition-all hover:bg-surface-container-lowest hover:shadow-lg border border-transparent hover:border-outline-variant/20 group">
+<div class="flex items-start justify-between mb-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="portrait of a professional executive in a dark blue suit with a clean office background in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4nYkg-FkwwlXv0WrYHtiqeqEHZbIK9kwOPLp1BHXV2DzkY02MTSS3DfabzRU5Et5cpLm6GJqZTomUlhCoGxBW1kHuhhuVHgvzxS63l_TEjBEu25kyNXnGz3KPYCUPPReBmaYnZg1tFY6d6HOrEi7EIUKEJrbGu4iQUewbabzMNQ-lytLi-Gjh2vSzc7PV0Sjt52PpDmAek0jKzTnuJ_Gr059eiPsej40svEvijeVeGhbtsxzcbo_ixlA8rgSayZO4lPsauku08Q"/>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center text-primary font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+                                4.9
+                            </div>
+<span class="text-[10px] text-outline font-medium uppercase tracking-widest">340 Orders</span>
+</div>
+</div>
+<h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">Summit Tech Distro</h3>
+<p class="text-xs text-secondary mt-1 line-clamp-1">Specializing in microchips &amp; connectivity</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex gap-2">
+<span class="bg-blue-50 text-blue-800 text-[10px] px-2 py-1 rounded font-bold">VERIFIED</span>
+<span class="bg-blue-50 text-blue-800 text-[10px] px-2 py-1 rounded font-bold">FAST SHIP</span>
+</div>
+</div>
+<!-- Supplier 2 -->
+<div class="min-w-[280px] bg-surface-container-low rounded-2xl p-6 transition-all hover:bg-surface-container-lowest hover:shadow-lg border border-transparent hover:border-outline-variant/20 group">
+<div class="flex items-start justify-between mb-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="successful business woman professional headshot with natural light and minimalist gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0_J12CJR2zzYBa72QOiG_LxofwKmeR7LjGW0rkrydFN1TSwLfjp8gL6_0OqeUZWxBfyR9UqXNMA3AvoGdCAkoKvgvpPx4wyM8dOkobWgII6xH-LR32O8TZ6_4yO3Y1SFXkNU6npHC4ot32th8GL1_X2LD78vHZA45CJ5hZZfBCpesaQxDotO0Hyra-cJkgAEp_x4h-cHkb3AO0xZ_vsETpr7hj3oCHNRnqPPHOEPvwoa3oeVKJld29b2BGCMD9lWGzXUTv-O2ug"/>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center text-primary font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+                                4.8
+                            </div>
+<span class="text-[10px] text-outline font-medium uppercase tracking-widest">1.2k Orders</span>
+</div>
+</div>
+<h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">Global Fabrics Ltd.</h3>
+<p class="text-xs text-secondary mt-1 line-clamp-1">Premium organic cotton &amp; sustainable dyes</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex gap-2">
+<span class="bg-blue-50 text-blue-800 text-[10px] px-2 py-1 rounded font-bold">PREMIUM</span>
+<span class="bg-blue-50 text-blue-800 text-[10px] px-2 py-1 rounded font-bold">ECO-CERT</span>
+</div>
+</div>
+<!-- Supplier 3 -->
+<div class="min-w-[280px] bg-surface-container-low rounded-2xl p-6 transition-all hover:bg-surface-container-lowest hover:shadow-lg border border-transparent hover:border-outline-variant/20 group">
+<div class="flex items-start justify-between mb-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="middle-aged male entrepreneur smiling in a modern bright workspace with tech elements in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr1hEojPHt1Cv5WK4mn2Blmzc1djO73pww803FqcaZXoOdpnAYMZIbtE2EjFf5ES31mSbapOFCITlsy0aAp6afalUxCbpL3jPUppZ8837ahWV9Xd1BN4CYLiHmtd_RELFSmSVY3G3PzTtm_wLOITRy2ERUU_R1eipirwjucsPM6Y-gGqH48diM9srLDdUb9xaSkedSu_vKoGxf1auuo9FGZIQAZEBUexSFA7bo6H_J8cN8SviWjRva5IjvkKtYNaDsz3gtOEhSdQ"/>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center text-primary font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+                                5.0
+                            </div>
+<span class="text-[10px] text-outline font-medium uppercase tracking-widest">89 Orders</span>
+</div>
+</div>
+<h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">Nexus Heavy Tools</h3>
+<p class="text-xs text-secondary mt-1 line-clamp-1">Industrial machinery and replacement parts</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex gap-2">
+<span class="bg-blue-50 text-blue-800 text-[10px] px-2 py-1 rounded font-bold">LOCAL</span>
+<span class="bg-blue-50 text-blue-800 text-[10px] px-2 py-1 rounded font-bold">DIRECT</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Trending Now (Vertical Editorial List) -->
+<section class="mb-12">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-extrabold text-primary tracking-tight">Trending Now</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-full border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Product 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-6 group hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="professional product shot of a red athletic sneaker on a vibrant minimalist background with sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCias3nRuYAzihlLg_j98AzmorUpGQ9QfFX8_yjBoYu6zKjeZQg1HUYyWoP_qKR8HiCAb7L5l92UC63W4RapemaeqoB7Ezbki1cDpa552d5bInp4o-ZPkPqPg4i0gVlqP3UPduMrcUa2TXa5Xkg6yTjlQwJpFJyq0PvTs8L1BwK493rThHnG7GXEqYm5IqtTJw7P-E2-zBzmjg0yJBfUkgQ-8-x0t25im64aKiCpzeJL4thYPHvNsmg12Nv8TX4WukG7zyIVFfSdA"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-lg text-primary">Pro-Air Athletics</h4>
+<p class="text-xs text-outline">SKU: PA-993-RED</p>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">$28.50</p>
+<p class="text-[10px] font-bold text-secondary uppercase">per unit</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mt-3">
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded text-[11px] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+                                MOQ: 24
+                            </div>
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded text-[11px] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                                2-4 Days
+                            </div>
+<button class="ml-auto text-primary p-2 hover:bg-blue-50 rounded-full transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-6 group hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="studio lighting on sleek black wireless headphones with metallic accents on a neutral gray surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX7PpYzqUswZCfVremh7Tb_Jp4U-vmVKISNfWXbgs-kBRNPfhaP9BqRV9hTrShYrvLMwe1kHvc_NGdO6XGntJZgG-csMd_hcQ2jONSlnv-BuO0eZwoFylMe9-QMF7NhqCONRTvbitHQSUpSV_nw0ICH1jLQz5-JlMpvnm9hKfysAaPcu5qy9ud3UGK5ySHKzcMJd1MeZJzILHebqgqykQ0X_c1MjMQKYC2yJ5E1P3f4rY3gfto0v5PTddV44HXrW8ZLBqz--cnaA"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-lg text-primary">Symphony Z-1 ANC</h4>
+<p class="text-xs text-outline">SKU: SZ-ANC-BLK</p>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">$42.00</p>
+<p class="text-[10px] font-bold text-secondary uppercase">per unit</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mt-3">
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded text-[11px] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+                                MOQ: 10
+                            </div>
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded text-[11px] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                                5-7 Days
+                            </div>
+<button class="ml-auto text-primary p-2 hover:bg-blue-50 rounded-full transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-6 group hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="elegant ceramic coffee set with wooden details arranged artfully on a marble countertop with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuwB8vpUNOq1xIs6Rndm4AxRLaZ0bJXvW5NAzdxAmABslGraT958Us9gp7j14Znn_NuMcv_-BA1CBjXGy4gOznmvL4By8TNJlOs4dh2AUJGfPzO4qewew1C9pFMJGML2fP0U8Wb4UnAkIdD-MUoppYsQBLFeWRERfqSGb-8Llw9bkDMt1gY-dSy8zncoFHTjkRVtindd4HNEtl0iv5kRXeqnXE8AXV-mmenTCcm-yd2XJ3v2z7cl1r1CMEojbC0RIcZI-y_-Fx5g"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-lg text-primary">Nordic Brew Set</h4>
+<p class="text-xs text-outline">SKU: NB-SET-04</p>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-on-surface">$15.75</p>
+<p class="text-[10px] font-bold text-secondary uppercase">per unit</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mt-3">
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded text-[11px] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+                                MOQ: 100
+                            </div>
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded text-[11px] font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                                3-5 Days
+                            </div>
+<button class="ml-auto text-primary p-2 hover:bg-blue-50 rounded-full transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 border-t border-slate-200/20 dark:border-slate-800/20 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 rounded-xl px-4 py-1.5 transition-transform duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home_app_logo</span>
+<span class="text-[11px] font-semibold font-inter uppercase tracking-wider mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[11px] font-semibold font-inter uppercase tracking-wider mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="text-[11px] font-semibold font-inter uppercase tracking-wider mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[11px] font-semibold font-inter uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+<!-- FAB for Quick Quote (Mobile-focused action) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform md:hidden">
+<span class="material-symbols-outlined">add_task</span>
+</button>
+</body></html>

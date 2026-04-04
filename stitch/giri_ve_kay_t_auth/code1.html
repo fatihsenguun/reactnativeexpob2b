@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stellar Commerce | Secure Access</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e0e3e6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#343d96",
+                    "surface-container-high": "#e6e8eb",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#5c1800",
+                    "secondary": "#4c616c",
+                    "primary-container": "#1a237e",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#526772",
+                    "primary": "#000666",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#ffdbd0",
+                    "surface": "#f7f9fc",
+                    "on-secondary-fixed": "#071e27",
+                    "surface-container": "#eceef1",
+                    "on-tertiary-fixed-variant": "#7b2e12",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#354a53",
+                    "on-primary-container": "#8690ee",
+                    "surface-bright": "#f7f9fc",
+                    "on-primary-fixed": "#000767",
+                    "surface-container-highest": "#e0e3e6",
+                    "on-tertiary-container": "#e17c5a",
+                    "surface-container-low": "#f2f4f7",
+                    "tertiary": "#380b00",
+                    "surface-tint": "#4c56af",
+                    "inverse-surface": "#2d3133",
+                    "outline-variant": "#c6c5d4",
+                    "secondary-fixed": "#cfe6f2",
+                    "inverse-primary": "#bdc2ff",
+                    "on-surface": "#191c1e",
+                    "on-surface-variant": "#454652",
+                    "on-tertiary-fixed": "#390c00",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#b4cad6",
+                    "on-error-container": "#93000a",
+                    "on-background": "#191c1e",
+                    "secondary-container": "#cfe6f2",
+                    "outline": "#767683",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "primary-fixed": "#e0e0ff",
+                    "inverse-on-surface": "#eff1f4",
+                    "background": "#f7f9fc",
+                    "surface-dim": "#d8dadd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopAppBar from JSON - Note: Active Nav suppressed for Transactional screen -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl shadow-sm h-16 flex items-center">
+<div class="flex items-center justify-between px-6 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-950" data-icon="rocket_launch">rocket_launch</span>
+<span class="text-xl font-extrabold tracking-tighter text-blue-950">Stellar Commerce</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-blue-900 transition-colors font-manrope text-sm font-bold tracking-tight">Help Center</button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-16 pb-8 px-4 relative overflow-hidden">
+<!-- Background Editorial Elements -->
+<div class="absolute top-0 right-0 -mr-32 -mt-32 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 -ml-32 -mb-32 w-[600px] h-[600px] bg-secondary-container/10 rounded-full blur-3xl"></div>
+<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden rounded-2xl shadow-2xl bg-surface-container-lowest">
+<!-- Visual Editorial Panel -->
+<div class="hidden lg:flex flex-col justify-between p-12 bg-primary relative overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Stellar HQ" class="w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="Modern architectural glass building with sharp angles and dramatic perspective under a clear blue sky, high-end corporate aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmJvoxyS3RqdMXArezye22u5e_C81d4B38s5lwsrsaj308Shi8Cv5DbVewsCTZ7oprhZnSEHZ9uyLdZiRR2LOiyBdi4dxEQYBLJfJgv0Dm9oUWNCHuY5OhvGGZAgHECoWY6FOnNNk4t4ntKFU-hq0ddxrfBTTW3vBwzBLmqu4CmMaUjb2mJYleq6PiFWXy1gsMasquy5vonwQj_iSWPv3GXZy2kYGn9QVNwa8_v-xEks16-pfLocaKuh96Aq7KfbViFUV06eywNw"/>
+</div>
+<div class="relative z-10">
+<h1 class="font-headline text-5xl font-extrabold text-white leading-tight tracking-tighter mb-6">
+                        Elevate Your <br/> Procurement <br/> Strategy.
+                    </h1>
+<p class="text-on-primary-container text-lg font-medium max-w-sm">
+                        Access the world's most sophisticated wholesale marketplace. Authenticate to manage your global inventory and orders.
+                    </p>
+</div>
+<div class="relative z-10 bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/10">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-200" data-icon="verified_user">verified_user</span>
+</div>
+<span class="text-white font-headline font-bold">Trusted by 10k+ Global Partners</span>
+</div>
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-primary object-cover" data-alt="professional male executive headshot with neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_lWXe3eL4he10znBXehCnwLGCqTY2eb9AGvE60yk-i0rRiZckAgzWl0OBzddmEWjFh_fI9FFX8ZaEPRxFXiiEyhbOaGJlgmOdz-euXXIIQqvRjKOWXfDDrEBVItqPEI_oCDcB3FdrAegwthlxSeK4grTiFiMSBdbAYcys8ttd7tG3VIiA-tcIgWA3X2TrS7oebpbbgIR7FwW1iEpAfArwF_W4j_WZb7tZywOq1hmYe9nbfsaDdc_1gE4F7vXyx7teNO2PxUTHTg"/>
+<img class="w-10 h-10 rounded-full border-2 border-primary object-cover" data-alt="professional female corporate leader headshot with blurred office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrliGPzOpl0_6pH2NLbhktbAR-nXJJrn7xu9T6B1cQUiur3-koqTefxUgBny6GK6u7G-df4hgJqsGsWB2oTghUfaHJ02U1erjPA9k8Pos9wBSF6J5EWnmtBQ1GCh6cf4C4OvE4-VSQsHL8jrDPoqS2L1LI7OWaBab8YXBqJ2yTp8BJw_aDxZMFSAPlEsaQSFV4cTdDVNlItKF0siZ_b1Ne2mHkqv86SaacciGhMwMloE5X0vmxEqF9RbYCrK8uYQbQQ9C02KaSgg"/>
+<img class="w-10 h-10 rounded-full border-2 border-primary object-cover" data-alt="smiling mature businessman in tailored suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl_HEMv6LxwdQNqbGoC1OTaTMWe2hmgmD-khXFWvIZuJ3sKRc0fanyzX_AIR4RenfQjRb62V7gAFsH0GNb66cVbcZOqPhLKah_G474cf7C5KfzQX5A95QOWEHHVLgy8fouTaAh0LHdH9LVy50QC-MKHo9B8ZEJCrLH2PsFWYp32TipQflmdJaxE_jGUMpKJqpVnPqHDouE8b_0uJNmHHNBbj4EypDBuA_dF9zuvibN8VAU-Tya044ROC4DAZ5TuvJKiauN2KMHdg"/>
+<div class="w-10 h-10 rounded-full border-2 border-primary bg-primary-container flex items-center justify-center text-[10px] text-white font-bold">+9k</div>
+</div>
+</div>
+</div>
+<!-- Authentication Form Panel -->
+<div class="p-8 lg:p-16 flex flex-col justify-center">
+<div class="mb-10 text-center lg:text-left">
+<h2 class="font-headline text-3xl font-bold text-blue-950 mb-2">Welcome Back</h2>
+<p class="text-on-secondary-container font-medium">Please enter your credentials to continue</p>
+</div>
+<!-- Role Switcher -->
+<div class="bg-surface-container-low p-1 rounded-xl flex mb-8">
+<button class="flex-1 py-3 px-4 rounded-lg text-sm font-bold font-headline transition-all bg-surface-container-lowest text-blue-950 shadow-sm">
+                        Buyer Account
+                    </button>
+<button class="flex-1 py-3 px-4 rounded-lg text-sm font-bold font-headline transition-all text-slate-500 hover:text-blue-900">
+                        Seller Portal
+                    </button>
+</div>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Corporate Email</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-4 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all text-on-surface font-medium placeholder:text-slate-400" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center ml-1">
+<label class="text-xs font-bold uppercase tracking-widest text-slate-500">Password</label>
+<a class="text-[11px] font-bold text-primary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="absolute inset-y-0 left-4 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</span>
+<input class="w-full pl-12 pr-12 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all text-on-surface font-medium placeholder:text-slate-400" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-4 flex items-center text-slate-400 hover:text-primary" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3 py-2">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-sm font-medium text-slate-600" for="remember">Remember this device for 30 days</label>
+</div>
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white font-headline font-bold rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+                        Secure Login
+                    </button>
+</form>
+<div class="mt-10 pt-8 border-t border-slate-100 text-center">
+<p class="text-slate-500 font-medium mb-4">New to the Stellar ecosystem?</p>
+<div class="flex flex-col sm:flex-row gap-3 justify-center">
+<a class="flex items-center justify-center gap-2 py-3 px-6 rounded-xl border border-outline-variant/20 hover:bg-slate-50 transition-colors font-bold text-sm text-blue-950" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="shopping_bag">shopping_bag</span>
+                            Register as a Buyer
+                        </a>
+<a class="flex items-center justify-center gap-2 py-3 px-6 rounded-xl border border-outline-variant/20 hover:bg-slate-50 transition-colors font-bold text-sm text-blue-950" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="store">store</span>
+                            Register as a Seller
+                        </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="py-8 px-6">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-[11px] font-bold uppercase tracking-widest">
+<div class="flex gap-8">
+<a class="hover:text-blue-900 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-blue-900 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-blue-900 transition-colors" href="#">Cookie Settings</a>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span>All Systems Operational</span>
+</div>
+<span>© 2024 Stellar Wholesale Corp. All Rights Reserved.</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-container": "#1a237e",
+                        "surface-container": "#eceef1",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e6e8eb",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-dim": "#d8dadd",
+                        "inverse-primary": "#bdc2ff",
+                        "surface-container-highest": "#e0e3e6",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "primary": "#000666",
+                        "outline": "#767683",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c6c5d4",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#cfe6f2",
+                        "surface-tint": "#4c56af",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "tertiary-container": "#5c1800",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#e17c5a",
+                        "background": "#f7f9fc",
+                        "on-secondary-fixed": "#071e27",
+                        "secondary": "#4c616c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#454652",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f7f9fc",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#380b00",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "surface-bright": "#f7f9fc",
+                        "surface-variant": "#e0e3e6",
+                        "on-primary-fixed": "#000767",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f2f4f7",
+                        "primary-fixed": "#e0e0ff",
+                        "on-secondary-container": "#526772",
+                        "on-primary-container": "#8690ee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl z-50">
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-900 dark:text-blue-400">arrow_back</span>
+</button>
+<h1 class="text-xl font-black tracking-tighter text-blue-900 dark:text-blue-100 uppercase">PROCURA</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-900 dark:text-blue-400">share</span>
+</button>
+<button class="hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-900 dark:text-blue-400">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-16 max-w-7xl mx-auto px-4 md:px-8">
+<!-- Hero Section: Editorial Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 py-8">
+<!-- Gallery: Asymmetric Bento Style -->
+<div class="lg:col-span-7 grid grid-cols-4 grid-rows-2 gap-3 h-[400px] md:h-[600px]">
+<div class="col-span-3 row-span-2 relative overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover" data-alt="high-end minimalist white smartwatch on a clean grey architectural surface with sharp professional shadows and bright lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB64Z6BwqfSi4YkM2ILZNh8l_Hx8A1tUK-DSKgSeBIY0ZNH300ktjGS0bLxHLDYD3PIcYbZfhS2h0NDYS2wk_gaE57-GvgZNLEWiNGHBeI9kODkgwrZYmS2sfyWsHtC3nT85q6uQMuFHBoJQkKzfk05FDeqjb8V1FGBnFYaZHJ22H147Y1cAzdytdb4VYZnJwv41pOer8vAiGwDFp7EkaBxlOFSaiMjzsqmYADcvuPEAqtO7234CDPVympSUZn8jEIzRo-hDfRv-g"/>
+</div>
+<div class="col-span-1 row-span-1 relative overflow-hidden rounded-xl bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="studio product shot of premium black headphones with soft leather textures and metallic highlights on a light grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE5t5Wop8NOwwCCjkEazQUKXVkPQR-iaGXTDwwJQ0IS1A9dtcsy0hPz5AgXE1xqvilRkPaVpgAxyLL4EHtCkm0fEVSbDzdwxNgujleZrrdGfYdC5WSIFjNMlUNE5z94PxXTYpEcXDdqJpmF1kZBAn231jAMHFiYV6Ln8rXJXASf2w1_lQstKSLWFKl11ymWBP6zJ1YWoDAMapbmUjRFPzxAyR9eEkCvv04NOz5cKZwVZp_ew7HLtd9oRVgNziD4sNw4Yr9dIa5rg"/>
+</div>
+<div class="col-span-1 row-span-1 relative overflow-hidden rounded-xl bg-surface-container-low flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="detail shot of high-performance red athletic shoe on a reflective surface showcasing material texture and precision stitching" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChJSoN_Z_RwEKi6ne7Sz7sd2mbbQKe-zAsPDJcsJuyv-AwwJwdky7DjL-oJuh90JkEDkK8P9EogXmkXXUF4s7KRsAnr7Pu1zxFChZa37CZOMVADz_LyV_BGsOBQpxD5HPUtip9wWxjgRZrQfgGrii9WUClx_HU1sAfH81Ljv8kyVy6GMD2_cuLVRJEXO1PQyXOSxS6ecR8zOcDRxxtknZ8egEIWFmV6a7G8GYIcmsU7VGS-CUhFMRek335Nb6u1LE4yb4xnNnsFw"/>
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm flex items-center justify-center text-white font-bold">+4</div>
+</div>
+</div>
+<!-- Product Identity -->
+<div class="lg:col-span-5 flex flex-col space-y-6">
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-0.5 rounded tracking-widest uppercase">Verified Supplier</span>
+<span class="text-outline text-xs font-medium uppercase tracking-tighter">SKU: PR-7729-LX</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-extrabold font-manrope text-on-surface tracking-tight leading-tight">Elite Series Precision Component X-1</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-prose">
+                        High-tolerance industrial precision component designed for aerospace and medical applications. Manufactured using Grade 5 Titanium alloy with specialized friction-reducing coating.
+                    </p>
+</div>
+<!-- Tiered Pricing: Editorial Table -->
+<div class="bg-surface-container-low rounded-xl p-6 space-y-4">
+<div class="flex justify-between items-end">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary">Wholesale Tiers</h3>
+<div class="text-right">
+<span class="block text-[10px] text-outline uppercase font-bold">MOQ</span>
+<span class="text-lg font-extrabold text-on-surface">500 Units</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center bg-surface-container-lowest p-3 rounded-lg border border-primary/5">
+<span class="text-sm font-semibold">500 – 1,999 units</span>
+<span class="text-xl font-bold text-primary">$12.45</span>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg opacity-80">
+<span class="text-sm font-medium">2,000 – 4,999 units</span>
+<span class="text-lg font-bold text-on-surface">$10.20</span>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg opacity-80">
+<span class="text-sm font-medium">5,000+ units</span>
+<span class="text-lg font-bold text-on-surface">$8.75</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Content Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 border-t border-outline-variant/10 pt-12">
+<!-- Left Side: Specs & Logistics -->
+<div class="lg:col-span-8 space-y-12">
+<!-- Logistics Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">local_shipping</span>
+<div>
+<h4 class="font-bold text-sm">Shipping Options</h4>
+<p class="text-xs text-on-surface-variant mt-1">FOB, CIF, EXW available. Global logistics partners: DHL, FedEx, Maersk.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">schedule</span>
+<div>
+<h4 class="font-bold text-sm">Estimated Lead Time</h4>
+<p class="text-xs text-on-surface-variant mt-1">15-20 days for MOQ. Custom branding adds 5 business days.</p>
+</div>
+</div>
+</div>
+<!-- Product Specifications -->
+<div class="space-y-6">
+<h3 class="text-xl font-bold font-manrope">Technical Specifications</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
+<div class="flex justify-between py-2 border-b border-outline-variant/10">
+<span class="text-sm text-on-surface-variant">Material</span>
+<span class="text-sm font-bold">Grade 5 Titanium</span>
+</div>
+<div class="flex justify-between py-2 border-b border-outline-variant/10">
+<span class="text-sm text-on-surface-variant">Weight per Unit</span>
+<span class="text-sm font-bold">142g</span>
+</div>
+<div class="flex justify-between py-2 border-b border-outline-variant/10">
+<span class="text-sm text-on-surface-variant">Certification</span>
+<span class="text-sm font-bold">ISO 9001:2015</span>
+</div>
+<div class="flex justify-between py-2 border-b border-outline-variant/10">
+<span class="text-sm text-on-surface-variant">Packaging</span>
+<span class="text-sm font-bold">Anti-static Tray</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Supplier Card -->
+<aside class="lg:col-span-4">
+<div class="sticky top-24 bg-surface-container-lowest p-6 rounded-2xl shadow-[0_32px_64px_rgba(0,6,102,0.04)] border border-outline-variant/5">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="modern corporate office building exterior with glass facade and professional landscaping for B2B supplier profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgSoIOqzcpioyI0H5ABko0m5YQmUI7DJpDnIi9o2ReZwaWl4i3eq4ulX_5BPLhMalNcbrurvPtdHKG1yj42nc40vo1eFiOg37gTtbGegImaIG5ASV4bYq0b77YZttptsbcQ9cPT2zTcDDLc7f87I_ZoXz_dFT8EATUdeD3ScI_pdBOoNY4CjVVrwde30wcR3bwrw9l8EdvuMItJZ7U7NW19sFTQUJQxf4i7_MLx8rBhrdVtplXIxFUHZL-3esK-ZtZRWFi-qS55g"/>
+</div>
+<div>
+<h4 class="font-extrabold text-lg">Apex Industrial Ltd.</h4>
+<div class="flex items-center gap-1 text-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-xs font-bold uppercase tracking-wider">Premium Partner</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="text-center p-3 bg-surface-container-low rounded-lg">
+<span class="block text-xl font-extrabold">12+</span>
+<span class="text-[10px] text-outline uppercase font-bold">Years Exp.</span>
+</div>
+<div class="text-center p-3 bg-surface-container-low rounded-lg">
+<span class="block text-xl font-extrabold">98%</span>
+<span class="text-[10px] text-outline uppercase font-bold">On-time</span>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-lg text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">mail</span>
+                            Contact Supplier
+                        </button>
+<button class="w-full py-3 border border-outline-variant text-on-surface font-bold rounded-lg text-sm flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">store</span>
+                            Visit Store
+                        </button>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<!-- Bottom Actions Bar: Sticky Mobile/Desktop -->
+<div class="fixed bottom-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 px-6 py-4 border-t border-slate-200/20 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Order Controls -->
+<div class="flex items-center gap-6 w-full md:w-auto">
+<div class="hidden md:flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-widest">Selected Quantity</span>
+<div class="flex items-center gap-4 mt-1 bg-surface-container rounded-lg px-2 py-1">
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-md transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="font-bold min-w-[40px] text-center">500</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-md transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-widest">Est. Total</span>
+<span class="text-2xl font-black text-primary">$6,225.00</span>
+</div>
+</div>
+<!-- Primary Buttons -->
+<div class="flex items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none md:px-12 py-4 bg-surface-container-lowest border border-primary/20 text-primary font-extrabold rounded-xl text-sm uppercase tracking-widest hover:bg-primary-fixed transition-colors">
+                    Request Quote
+                </button>
+<button class="flex-1 md:flex-none md:px-16 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-extrabold rounded-xl text-sm uppercase tracking-widest shadow-xl shadow-primary/10 active:scale-[0.98] transition-all">
+                    Order Now
+                </button>
+</div>
+</div>
+</div>
+<!-- Hidden Bottom Nav for top-level context (Suppressing as per Task-Focused rule, but structure included if needed) -->
+<!-- The user is in a deep "Product Detail" view, so navigation shell is suppressed to prioritize the task -->
+</body></html>

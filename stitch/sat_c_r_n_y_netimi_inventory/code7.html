@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stellar Commerce | Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#767683",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-background": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceef1",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "secondary": "#4c616c",
+                        "on-secondary-container": "#526772",
+                        "surface-bright": "#f7f9fc",
+                        "on-secondary-fixed": "#071e27",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-fixed": "#ffdbd0",
+                        "primary-fixed": "#e0e0ff",
+                        "on-tertiary-container": "#e17c5a",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "on-primary-container": "#8690ee",
+                        "surface-container-high": "#e6e8eb",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-surface-variant": "#454652",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-dim": "#d8dadd",
+                        "primary": "#000666",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#4c56af",
+                        "on-primary-fixed": "#000767",
+                        "inverse-primary": "#bdc2ff",
+                        "on-tertiary-fixed": "#390c00",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c6c5d4",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1a237e",
+                        "background": "#f7f9fc",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#380b00",
+                        "surface": "#f7f9fc",
+                        "tertiary-container": "#5c1800",
+                        "secondary-fixed": "#cfe6f2",
+                        "secondary-container": "#cfe6f2",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fc; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="business_identity">business</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-indigo-950">Stellar Commerce</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-indigo-700 font-semibold font-inter text-sm" href="#">Inventory</a>
+<a class="text-slate-500 hover:bg-slate-100 px-3 py-1 rounded transition-colors duration-200 font-inter text-sm" href="#">Orders</a>
+<a class="text-slate-500 hover:bg-slate-100 px-3 py-1 rounded transition-colors duration-200 font-inter text-sm" href="#">Insights</a>
+</nav>
+<div class="w-[1px] h-6 bg-slate-200/50"></div>
+<button class="active:scale-95 transition-transform text-indigo-900">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-200/50 h-[1px] w-full"></div>
+</header>
+<div class="flex min-h-screen pt-16 pb-20 md:pb-0">
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden lg:flex flex-col w-80 h-[calc(100vh-64px)] bg-slate-50 border-r border-slate-100 sticky top-16">
+<div class="flex flex-col h-full py-8">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-xl object-cover" data-alt="Professional business manager headshot with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0-4wz03A7WA4qW5DWYHORhfhsFaZ93TJL8e4qsZPQlRNYpMKrTyoGJcrmwlVjcIHjtpXQ-fgFJCJ143V8PM1fpHEgDiywHZFPZWKge11aF7E3xL42uKqutzabRu9ncPnXR-soBSNDtnuu4tBkrKxO94frNQpdYi_4BDkpWG82z9RauWrJ3uR3Pb2iYcSplZpVxXvjOyX4VrRIATVb5OudPMr7okilnXL58VJxM6G6S3kfKmnYYsrzt74M1_CMkcuFXrxf1L9fWw"/>
+<div>
+<p class="font-manrope text-base font-semibold text-indigo-900">Stellar Admin</p>
+<p class="text-xs text-slate-500">Verified Wholesaler</p>
+</div>
+</div>
+</div>
+<nav class="space-y-1">
+<div class="text-slate-600 mx-2 px-4 py-3 hover:bg-slate-200 rounded-xl transition-all flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-manrope font-semibold">Dashboard</span>
+</div>
+<div class="text-slate-600 mx-2 px-4 py-3 hover:bg-slate-200 rounded-xl transition-all flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="font-manrope font-semibold">Catalog</span>
+</div>
+<div class="bg-indigo-50 text-indigo-700 rounded-xl mx-2 px-4 py-3 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="box">box</span>
+<span class="font-manrope font-semibold">Inventory</span>
+</div>
+<div class="text-slate-600 mx-2 px-4 py-3 hover:bg-slate-200 rounded-xl transition-all flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-manrope font-semibold">Verified Business</span>
+</div>
+<div class="text-slate-600 mx-2 px-4 py-3 hover:bg-slate-200 rounded-xl transition-all flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+<span class="font-manrope font-semibold">Security</span>
+</div>
+</nav>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 max-w-7xl mx-auto p-6 md:p-10 space-y-8">
+<!-- Header & Search -->
+<section class="space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Global Inventory</h2>
+<p class="text-on-surface-variant font-body mt-1">Manage wholesale stocks and pricing architecture.</p>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-md font-semibold flex items-center gap-2 shadow-lg hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                        Add New SKU
+                    </button>
+</div>
+<div class="bg-surface-container-low p-2 rounded-xl flex flex-col md:flex-row gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-outline/60" placeholder="Search by SKU, Product Name or Category..." type="text"/>
+</div>
+<button class="bg-surface-container-highest px-6 py-3 rounded-lg flex items-center justify-center gap-2 text-on-surface-variant font-medium hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                        Filters
+                    </button>
+</div>
+</section>
+<!-- Inventory Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Item Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-4 shadow-sm group hover:shadow-md transition-shadow">
+<div class="relative h-48 rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="High-performance red athletic sneaker on a minimalist concrete background with sharp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJNa9eYPTftuClUr8nW9bcACnE-fM6QXbeTRC3QU4eFKoeDratjWHN7DWaep4-QaJJQiP4W62jUCPvqTt9ot9kXzMH-HIHvGtfoumR6zgcWIhLWj9l805Mf_NDMLDGBMlIFM03XN6ayO1wLLQvg-DMiHSgGl0NwUZ150LUAkPDw-TXl0-N50-GVMBOH8I5kmh5lUlug31hpuYfJ6SMnr5X5GHFPd8xkA1r5DsUJqltsnuSVByLTcvDw30szBoLbKMLLlgqtUrUHg"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-manrope font-bold text-lg text-indigo-950">Vanguard Air-Line Z</h3>
+<span class="text-primary font-bold text-lg">$142.00</span>
+</div>
+<p class="text-xs text-outline font-medium">SKU: STLR-VNG-2024</p>
+</div>
+<div class="grid grid-cols-2 gap-4 py-2 border-y border-outline-variant/20">
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Stock Level</p>
+<p class="text-sm font-semibold text-on-surface">1,240 Units</p>
+</div>
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Velocity</p>
+<p class="text-sm font-semibold text-on-surface">High (82%)</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-md bg-surface-container-low text-indigo-900 font-semibold text-sm hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Edit
+                        </button>
+<button class="p-2 rounded-md bg-surface-container-low text-tertiary hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Item Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-4 shadow-sm group hover:shadow-md transition-shadow">
+<div class="relative h-48 rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist white smart watch with gray band on a clean desk with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSW6T-Um3rGDrkc_dvbzrZQAJqjO3ORzEjZ0vgSELxrghwxl5vUEFkbChmNFfVGM8vH6bSFcrJrdI_g0tokmDwd61Aj7bONCp5xTEV5mLQKev65Quism2vl-qp_oLD8ESSjjQcljRCi5tlCncpu7L9LlDfgoJbszHsZOAbTntTCRVIS8loDF8mfJWfwClE7azy09DChU9srJwa07hJSvgRvMFVxng0eUtB4d2_D4mGgOOfgn08MIjZWxlEpkvME3cJueP7IgzX5w"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-tertiary-fixed text-tertiary px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Low Stock</span>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-manrope font-bold text-lg text-indigo-950">Horizon Smart Series 4</h3>
+<span class="text-primary font-bold text-lg">$289.00</span>
+</div>
+<p class="text-xs text-outline font-medium">SKU: STLR-HRZ-9901</p>
+</div>
+<div class="grid grid-cols-2 gap-4 py-2 border-y border-outline-variant/20">
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Stock Level</p>
+<p class="text-sm font-semibold text-tertiary">12 Units</p>
+</div>
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Velocity</p>
+<p class="text-sm font-semibold text-on-surface">Moderate</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-md bg-surface-container-low text-indigo-900 font-semibold text-sm hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Edit
+                        </button>
+<button class="p-2 rounded-md bg-surface-container-low text-tertiary hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Item Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-4 shadow-sm group hover:shadow-md transition-shadow">
+<div class="relative h-48 rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Premium wireless headphones on a dark textured background with dramatic blue and orange rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ78NEc9MJyhZiU5or0Os_pMY-CNNbzjv0KR58vLe3VFDPRQKM8RzKaWMNHvtMwEfEafnffHG4WJXvGf19WidR5QN2PPWiYLrjUimM17yypkurE36Uz6SHgvgC3WqAYIWqyoWRfNDBOXnje_iBqeKVFRA3R5zvya7sMJga2IZWfJgg_IthkpLDAEN60nZuTihcSy1OY23ZA7Gi_o7R8xATLliqFljzxcgP0DEKetd2eHFkVArLOkau_IFaknsmHpMD0vvvdvJ2Wg"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-manrope font-bold text-lg text-indigo-950">Titan Audio Over-Ear</h3>
+<span class="text-primary font-bold text-lg">$210.00</span>
+</div>
+<p class="text-xs text-outline font-medium">SKU: STLR-TTN-4422</p>
+</div>
+<div class="grid grid-cols-2 gap-4 py-2 border-y border-outline-variant/20">
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Stock Level</p>
+<p class="text-sm font-semibold text-on-surface">450 Units</p>
+</div>
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Velocity</p>
+<p class="text-sm font-semibold text-on-surface">Stable</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-md bg-surface-container-low text-indigo-900 font-semibold text-sm hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Edit
+                        </button>
+<button class="p-2 rounded-md bg-surface-container-low text-tertiary hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Item Card 4 (Asymmetric Large Featured Card) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 md:col-span-2 xl:col-span-1 flex flex-col gap-4 shadow-sm group hover:shadow-md transition-shadow bg-gradient-to-br from-white to-indigo-50/30">
+<div class="relative h-48 rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern organic skincare bottles in a tiered arrangement with eucalyptus leaves and natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMVizX6VzZLI6eXLffsmXZPhYwn3ymUC3QdgVjZhvyF8WAIZCq8MXO3MlhfBfitlYW5wOR1CtH5zFYOHkvv_JqZi8awtXyep7ptrabMwQCujcj3kGVUEiPBpW30mKZrz4LxgKoAMfgSdsykv6o90hS_Xn9Ja38g38gsZv_LzrrmYQXjARmmDZtHfJyKf0oDP5kUfstJhEurKQfr7Chv840LkNRFjrFGWpbAyJbz9xc_5TYw3JkL_2WSZqcr6vhhC3BMs1XLDdshQ"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-indigo-600 text-white px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Top Seller</span>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-manrope font-bold text-lg text-indigo-950">Bio-Essence Skin Care Kit</h3>
+<span class="text-primary font-bold text-lg">$64.00</span>
+</div>
+<p class="text-xs text-outline font-medium">SKU: STLR-BIO-7712</p>
+</div>
+<div class="grid grid-cols-2 gap-4 py-2 border-y border-outline-variant/20">
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Stock Level</p>
+<p class="text-sm font-semibold text-on-surface">3,400 Units</p>
+</div>
+<div>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">Velocity</p>
+<p class="text-sm font-semibold text-indigo-600">Exponential (94%)</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-md bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Edit
+                        </button>
+<button class="p-2 rounded-md bg-surface-container-low text-tertiary hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 bg-white/80 backdrop-blur-xl border-t border-slate-100 flex justify-around items-center px-4 pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-indigo-700 relative after:content-[''] after:absolute after:top-0 after:w-12 after:h-1 after:bg-indigo-600 after:rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase mt-1">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase mt-1">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase mt-1">Account</span>
+</a>
+</nav>
+</body></html>
