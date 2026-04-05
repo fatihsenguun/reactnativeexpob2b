@@ -5,38 +5,21 @@ import {
   ScrollView, 
   TextInput, 
   Pressable, 
-  Image, 
-
-  Platform 
+  Image 
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function BuyerHomeScreen() {
   return (
-    <SafeAreaView className="flex-1 bg-buyer-surface">
-      
-      {/* 1. TOP APP BAR (HEADER) */}
-      <View className="flex-row items-center justify-between px-6 py-4 bg-buyer-surface-container-lowest/90 z-50">
-        <View className="flex-row items-center gap-3">
-          <Pressable className="p-2 rounded-lg active:bg-buyer-surface-container-high transition-colors">
-            <MaterialIcons name="grid-view" size={24} color="#004ac6" />
-          </Pressable>
-          <Text className="text-xl font-extrabold tracking-tighter text-buyer-primary">PROCURA</Text>
-        </View>
-        <Pressable className="p-2 rounded-lg active:bg-buyer-surface-container-high transition-colors">
-          <MaterialIcons name="notifications" size={24} color="#004ac6" />
-        </Pressable>
-      </View>
-
+    <View className="flex-1 bg-buyer-surface">
       <ScrollView 
-        contentContainerStyle={{ paddingBottom: 100 }} 
+        contentContainerStyle={{ paddingBottom: 110 }} 
         showsVerticalScrollIndicator={false}
-        className="px-4 md:px-8 pt-2"
+        className="px-4 md:px-8 pt-6"
       >
         
-        {/* 2. SEARCH BAR SECTION */}
-        <View className="mb-8 mt-2">
+        {/* 1. SEARCH BAR SECTION */}
+        <View className="mb-8">
           <View className="relative justify-center">
             <View className="absolute left-4 z-10">
               <MaterialIcons name="search" size={24} color="#737686" />
@@ -49,7 +32,7 @@ export default function BuyerHomeScreen() {
           </View>
         </View>
 
-        {/* 3. CATEGORY GRID */}
+        {/* 2. CATEGORY GRID */}
         <View className="mb-10">
           <View className="flex-row justify-between items-end mb-6">
             <View>
@@ -80,7 +63,7 @@ export default function BuyerHomeScreen() {
           </View>
         </View>
 
-        {/* 4. FLASH WHOLESALE DEALS */}
+        {/* 3. FLASH WHOLESALE DEALS */}
         <View className="mb-12">
           <View className="flex-row items-center gap-2 mb-6">
             <MaterialIcons name="bolt" size={28} color="#943700" />
@@ -93,7 +76,6 @@ export default function BuyerHomeScreen() {
               source={{ uri: 'https://picsum.photos/id/1078/800/400' }} 
               className="absolute inset-0 w-full h-full" 
             />
-            {/* Dark Gradient Overlay */}
             <View className="absolute inset-0 bg-black/40" />
             
             <View className="absolute bottom-0 left-0 p-6 w-full">
@@ -123,7 +105,6 @@ export default function BuyerHomeScreen() {
             </View>
             <Text className="text-xs text-buyer-secondary mb-4 font-medium">MOQ: 500 Units</Text>
             
-            {/* Progress Bar */}
             <View className="w-full bg-buyer-surface-container h-1.5 rounded-full overflow-hidden">
               <View className="bg-buyer-primary h-full w-[85%]" />
             </View>
@@ -131,12 +112,11 @@ export default function BuyerHomeScreen() {
           </View>
         </View>
 
-        {/* 5. TOP RATED WHOLESALERS (Horizontal Scroll) */}
+        {/* 4. TOP RATED WHOLESALERS */}
         <View className="mb-12">
           <Text className="text-2xl font-extrabold text-buyer-primary tracking-tight mb-6">Top Rated Wholesalers</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row overflow-visible">
             
-            {/* Supplier Card */}
             {[
               { id: 1, name: 'Summit Tech Distro', desc: 'Specializing in microchips', orders: '340', rating: '4.9', img: '1005' },
               { id: 2, name: 'Global Fabrics Ltd.', desc: 'Premium organic cotton', orders: '1.2K', rating: '4.8', img: '1027' },
@@ -165,7 +145,7 @@ export default function BuyerHomeScreen() {
           </ScrollView>
         </View>
 
-        {/* 6. TRENDING NOW (Vertical List) */}
+        {/* 5. TRENDING NOW */}
         <View className="mb-4">
           <View className="flex-row justify-between items-center mb-6">
             <Text className="text-2xl font-extrabold text-buyer-primary tracking-tight">Trending Now</Text>
@@ -215,16 +195,13 @@ export default function BuyerHomeScreen() {
         </View>
       </ScrollView>
 
-      {/* 7. FLOATING ACTION BUTTON (FAB) */}
+      {/* 6. FLOATING ACTION BUTTON (FAB) */}
       <Pressable 
         className="absolute bottom-24 right-6 w-14 h-14 bg-buyer-primary rounded-full flex items-center justify-center shadow-lg active:scale-95"
         style={{ elevation: 6, shadowColor: '#004ac6', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8 }}
       >
         <MaterialIcons name="add-task" size={24} color="#ffffff" />
       </Pressable>
-
-      {/* 8. BOTTOM NAVIGATION BAR (Mockup - Usually handled by Expo Router _layout.tsx Tabs) */}
- 
-    </SafeAreaView>
+    </View>
   );
 }
