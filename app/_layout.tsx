@@ -11,7 +11,8 @@ export default function RootLayout() {
     checkAuth();
   }, []);
 
-
+  // Sadece Stack ve StatusBar dönüyoruz.
+  // Yönlendirme mantığını buraya ASLA koymuyoruz.
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
