@@ -15,13 +15,11 @@ import axios from 'axios';
 import { useAuthStore } from '../../src/store/useAuthStore';
 import CustomInput from '../../src/components/CustomInput';
 
-
-const API_URL =  'http://localhost:8080';
+// Android emülatörleri için 10.0.2.2, iOS ve Web için localhost
+const API_URL = 'http://localhost:8080';
 
 export default function LoginScreen() {
   const router = useRouter();
-  
-
   const { login } = useAuthStore();
   
   const [email, setEmail] = useState('');
@@ -30,7 +28,7 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-
+  // --- TAILWIND CONFIG DİNAMİK SINIFLARI ---
   const bgClass = isBuyer ? 'bg-buyer-surface' : 'bg-seller-surface';
   const tabContainerBg = isBuyer ? 'bg-buyer-surface-container-low' : 'bg-seller-surface-container-low';
   const buttonBg = isBuyer ? 'bg-buyer-primary' : 'bg-seller-primary';
@@ -40,6 +38,7 @@ export default function LoginScreen() {
   const shadowTint = isBuyer ? '#151c27' : '#131b2e'; 
   const welcomeTitle = isBuyer ? 'Buyer Account' : 'Seller Dashboard';
 
+  // --- GÜNCELLENMİŞ LOGIN FONKSİYONU ---
   const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Please enter both email and password.");
@@ -47,7 +46,7 @@ export default function LoginScreen() {
     }
 
     try {
-
+      // 1. Sadece Email ve Şifre ile Token'ları alıyoruz
       const loginResponse = await axios.post(`${API_URL}/login`, {
         email: email,
         password: password
@@ -57,17 +56,32 @@ export default function LoginScreen() {
         
         const { accessToken, refreshToken } = loginResponse.data.data;
         
-        const requestedRole = isBuyer ? 'ROLE_BUYER' : 'ROLE_SELLER';
-        await login(accessToken, refreshToken, requestedRole);
+        // 2. Token'ı kullanarak kullanıcının gerçek bilgilerini (/user/me) çekiyoruz
+        // Not: Eğer Controller'ında @RequestMapping("/api/user") varsa burayı ona göre güncellemelisin. (Örn: /api/user/me)
+        const userResponse = await axios.get(`${API_URL}/me`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        });
 
-        router.replace(requestedRole === 'ROLE_SELLER' ? '/(seller)/dashboard' : '/(buyer)/home');
+        // 3. Backend'den gelen DtoUser içindeki GERÇEK rolü alıyoruz
+        const currentUser = userResponse.data.data; 
+        const backendRole = currentUser.role; // Örn: 'ROLE_BUYER' veya 'ROLE_SELLER'
+
+        // 4. Token'ları ve GERÇEK rolü Zustand State'e (ve SecureStore'a) kaydediyoruz
+        await login(accessToken, refreshToken, backendRole);
+        
+        // 5. Backend'den gelen role göre doğru panele yönlendiriyoruz
+        if (backendRole === 'ROLE_SELLER') {
+          router.replace('/(seller)/dashboard');
+        } else {
+          // Varsayılan olarak Buyer (Alıcı) paneline yönlendir
+          router.replace('/(buyer)/home');
+        }
 
       } else {
         Alert.alert("Login Failed", loginResponse.data.errorMessage || "Invalid credentials");
       }
     } catch (error: any) {
       console.error("Login error:", error);
-
       const errorMsg = error.response?.data?.errorMessage || "Could not connect to the server.";
       Alert.alert("Error", errorMsg);
     }
