@@ -64,21 +64,20 @@ export default function LoginScreen() {
         const currentUser = userResponse.data.data; 
         const backendRole = currentUser.role; 
 
-        // 3. YENİ MANTIK: SÜPER ROL (SELLER) VE NORMAL ROL (BUYER) KONTROLÜ
         const proceedToApp = async (role: string) => {
           await login(accessToken, refreshToken, role as any);
 
           if (role === 'ROLE_SELLER') {
-            // SATICI (SÜPER ROL): Seçtiği sekmeye saygı duy. İster Alıcı olsun ister Satıcı.
+
             if (isBuyer) {
               router.replace('/(buyer)/home');
             } else {
               router.replace('/(seller)/dashboard');
             }
           } else if (role === 'ROLE_BUYER') {
-            // ALICI (NORMAL ROL): Sadece Alıcı paneline gidebilir.
+
             if (!isBuyer) {
-              // Satıcı sekmesinden girmeye çalıştıysa uyar ve Alıcı paneline at.
+
               Alert.alert(
                 "Access Denied",
                 "You only have a Buyer account. Redirecting you to the Buyer portal.",
