@@ -38,7 +38,8 @@ export default function LoginScreen() {
   const shadowTint = isBuyer ? '#151c27' : '#131b2e'; 
   const welcomeTitle = isBuyer ? 'Buyer Account' : 'Seller Dashboard';
 
-  // --- GÜNCELLENMİŞ LOGIN FONKSİYONU ---
+
+// --- GÜNCELLENMİŞ LOGIN FONKSİYONU ---
   const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Please enter both email and password.");
@@ -46,36 +47,52 @@ export default function LoginScreen() {
     }
 
     try {
-      // 1. Sadece Email ve Şifre ile Token'ları alıyoruz
+      // 1. Token'ları alıyoruz
       const loginResponse = await axios.post(`${API_URL}/login`, {
         email: email,
         password: password
       });
 
       if (loginResponse.data && loginResponse.data.data) {
-        
         const { accessToken, refreshToken } = loginResponse.data.data;
         
-        // 2. Token'ı kullanarak kullanıcının gerçek bilgilerini (/user/me) çekiyoruz
-        // Not: Eğer Controller'ında @RequestMapping("/api/user") varsa burayı ona göre güncellemelisin. (Örn: /api/user/me)
+        // 2. Kullanıcının gerçek bilgilerini çekiyoruz
         const userResponse = await axios.get(`${API_URL}/me`, {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
 
-        // 3. Backend'den gelen DtoUser içindeki GERÇEK rolü alıyoruz
         const currentUser = userResponse.data.data; 
-        const backendRole = currentUser.role; // Örn: 'ROLE_BUYER' veya 'ROLE_SELLER'
+        const backendRole = currentUser.role; 
 
-        // 4. Token'ları ve GERÇEK rolü Zustand State'e (ve SecureStore'a) kaydediyoruz
-        await login(accessToken, refreshToken, backendRole);
-        
-        // 5. Backend'den gelen role göre doğru panele yönlendiriyoruz
-        if (backendRole === 'ROLE_SELLER') {
-          router.replace('/(seller)/dashboard');
-        } else {
-          // Varsayılan olarak Buyer (Alıcı) paneline yönlendir
-          router.replace('/(buyer)/home');
-        }
+        // 3. YENİ MANTIK: SÜPER ROL (SELLER) VE NORMAL ROL (BUYER) KONTROLÜ
+        const proceedToApp = async (role: string) => {
+          await login(accessToken, refreshToken, role as any);
+
+          if (role === 'ROLE_SELLER') {
+            // SATICI (SÜPER ROL): Seçtiği sekmeye saygı duy. İster Alıcı olsun ister Satıcı.
+            if (isBuyer) {
+              router.replace('/(buyer)/home');
+            } else {
+              router.replace('/(seller)/dashboard');
+            }
+          } else if (role === 'ROLE_BUYER') {
+            // ALICI (NORMAL ROL): Sadece Alıcı paneline gidebilir.
+            if (!isBuyer) {
+              // Satıcı sekmesinden girmeye çalıştıysa uyar ve Alıcı paneline at.
+              Alert.alert(
+                "Access Denied",
+                "You only have a Buyer account. Redirecting you to the Buyer portal.",
+                [{ text: "OK", onPress: () => router.replace('/(buyer)/home') }]
+              );
+            } else {
+              // Doğru sekmeden girdiyse direkt geçiş yap
+              router.replace('/(buyer)/home');
+            }
+          }
+        };
+
+        // Yönlendirme fonksiyonunu çağır
+        proceedToApp(backendRole);
 
       } else {
         Alert.alert("Login Failed", loginResponse.data.errorMessage || "Invalid credentials");
@@ -197,10 +214,14 @@ export default function LoginScreen() {
         <View className="mt-10 pt-8 border-t border-slate-200/60 items-center">
           <Text className="text-slate-500 font-medium mb-4 text-sm">New to B2B?</Text>
           
-          <View className="w-full">
+        <View className="w-full">
             <Pressable 
               className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-slate-200 bg-white active:opacity-80"
-              onPress={() => router.push('/(auth)/register')}
+
+              onPress={() => router.push({
+                pathname: '/(auth)/register',
+                params: { defaultRole: isBuyer ? 'ROLE_BUYER' : 'ROLE_SELLER' }
+              })}
             >
               <MaterialIcons name="person-add" size={18} color={primaryHex} />
               <Text className={`font-bold text-sm ${textPrimaryClass}`}>Create an Account</Text>
