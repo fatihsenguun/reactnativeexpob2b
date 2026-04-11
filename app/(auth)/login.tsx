@@ -11,12 +11,10 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import axios from 'axios';
+import { axiosClient } from '../../src/api/axiosClient';
 import { useAuthStore } from '../../src/store/useAuthStore';
 import CustomInput from '../../src/components/CustomInput';
-
-// Android emülatörleri için 10.0.2.2, iOS ve Web için localhost
-const API_URL = 'http://localhost:8080';
+import { BUYER_COLORS, SELLER_COLORS } from '../../src/style/colors';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -28,18 +26,16 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // --- TAILWIND CONFIG DİNAMİK SINIFLARI ---
   const bgClass = isBuyer ? 'bg-buyer-surface' : 'bg-seller-surface';
   const tabContainerBg = isBuyer ? 'bg-buyer-surface-container-low' : 'bg-seller-surface-container-low';
   const buttonBg = isBuyer ? 'bg-buyer-primary' : 'bg-seller-primary';
   const textPrimaryClass = isBuyer ? 'text-buyer-primary' : 'text-seller-primary';
-  const primaryHex = isBuyer ? '#004ac6' : '#3525cd'; 
-  const inactiveHex = isBuyer ? '#c3c6d7' : '#c7c4d8';
-  const shadowTint = isBuyer ? '#151c27' : '#131b2e'; 
+  
+  const primaryHex = isBuyer ? BUYER_COLORS.primary : SELLER_COLORS.primary; 
+  const inactiveHex = isBuyer ? BUYER_COLORS.outlineVariant : SELLER_COLORS.outlineVariant;
+  const shadowTint = isBuyer ? BUYER_COLORS.onSurface : SELLER_COLORS.onSurface; 
   const welcomeTitle = isBuyer ? 'Buyer Account' : 'Seller Dashboard';
 
-
-// --- GÜNCELLENMİŞ LOGIN FONKSİYONU ---
   const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Please enter both email and password.");
@@ -47,8 +43,7 @@ export default function LoginScreen() {
     }
 
     try {
-      // 1. Token'ları alıyoruz
-      const loginResponse = await axios.post(`${API_URL}/login`, {
+      const loginResponse = await axiosClient.post('/login', {
         email: email,
         password: password
       });
@@ -56,8 +51,7 @@ export default function LoginScreen() {
       if (loginResponse.data && loginResponse.data.data) {
         const { accessToken, refreshToken } = loginResponse.data.data;
         
-        // 2. Kullanıcının gerçek bilgilerini çekiyoruz
-        const userResponse = await axios.get(`${API_URL}/me`, {
+        const userResponse = await axiosClient.get('/me', {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
 
@@ -65,32 +59,28 @@ export default function LoginScreen() {
         const backendRole = currentUser.role; 
 
         const proceedToApp = async (role: string) => {
-          await login(accessToken, refreshToken, role as any);
+          // DÜZELTME BURADA: currentUser verisini 4. parametre olarak store'a gönderiyoruz
+          await login(accessToken, refreshToken, role as any, currentUser);
 
           if (role === 'ROLE_SELLER') {
-
             if (isBuyer) {
               router.replace('/(buyer)/home');
             } else {
               router.replace('/(seller)/dashboard');
             }
           } else if (role === 'ROLE_BUYER') {
-
             if (!isBuyer) {
-
               Alert.alert(
                 "Access Denied",
                 "You only have a Buyer account. Redirecting you to the Buyer portal.",
                 [{ text: "OK", onPress: () => router.replace('/(buyer)/home') }]
               );
             } else {
-              // Doğru sekmeden girdiyse direkt geçiş yap
               router.replace('/(buyer)/home');
             }
           }
         };
 
-        // Yönlendirme fonksiyonunu çağır
         proceedToApp(backendRole);
 
       } else {
@@ -213,10 +203,9 @@ export default function LoginScreen() {
         <View className="mt-10 pt-8 border-t border-slate-200/60 items-center">
           <Text className="text-slate-500 font-medium mb-4 text-sm">New to B2B?</Text>
           
-        <View className="w-full">
+          <View className="w-full">
             <Pressable 
               className="flex-row items-center justify-center gap-2 py-3 px-6 rounded-xl border border-slate-200 bg-white active:opacity-80"
-
               onPress={() => router.push({
                 pathname: '/(auth)/register',
                 params: { defaultRole: isBuyer ? 'ROLE_BUYER' : 'ROLE_SELLER' }

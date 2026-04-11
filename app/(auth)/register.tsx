@@ -11,11 +11,10 @@ import {
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import axios from 'axios';
+import { axiosClient } from '../../src/api/axiosClient';
 import { useAuthStore } from '../../src/store/useAuthStore';
 import CustomInput from '../../src/components/CustomInput';
-
-const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:8080' : 'http://localhost:8080';
+import { BUYER_COLORS, SELLER_COLORS } from '../../src/style/colors';
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -44,9 +43,9 @@ export default function RegisterScreen() {
   const buttonBg = isBuyer ? 'bg-buyer-primary' : 'bg-seller-primary';
   const textPrimaryClass = isBuyer ? 'text-buyer-primary' : 'text-seller-primary';
   
-  const primaryHex = isBuyer ? '#004ac6' : '#3525cd'; 
-  const inactiveHex = isBuyer ? '#c3c6d7' : '#c7c4d8'; 
-  const shadowTint = isBuyer ? '#151c27' : '#131b2e'; 
+  const primaryHex = isBuyer ? BUYER_COLORS.primary : SELLER_COLORS.primary; 
+  const inactiveHex = isBuyer ? BUYER_COLORS.outlineVariant : SELLER_COLORS.outlineVariant; 
+  const shadowTint = isBuyer ? BUYER_COLORS.onSurface : SELLER_COLORS.onSurface; 
   
   const welcomeTitle = isBuyer ? 'Join as a Buyer' : 'Partner with Us';
 
@@ -63,7 +62,7 @@ export default function RegisterScreen() {
     const selectedRole = isBuyer ? 'ROLE_BUYER' : 'ROLE_SELLER';
 
     try {
-      const response = await axios.post(`${API_URL}/register`, {
+      const response = await axiosClient.post('/register', {
         fullName: fullName,
         email: email,
         password: password,
@@ -73,7 +72,13 @@ export default function RegisterScreen() {
       if (response.data && response.data.data) {
         const { accessToken, refreshToken } = response.data.data;
         
-        await login(accessToken, refreshToken, selectedRole as any);
+        const userResponse = await axiosClient.get('/me', {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        });
+        
+        const currentUser = userResponse.data.data;
+        
+        await login(accessToken, refreshToken, selectedRole as any, currentUser);
         
         if (selectedRole === 'ROLE_SELLER') {
           router.replace('/(seller)/dashboard');
