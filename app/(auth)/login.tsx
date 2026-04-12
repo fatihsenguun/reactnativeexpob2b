@@ -58,26 +58,37 @@ export default function LoginScreen() {
         const currentUser = userResponse.data.data; 
         const backendRole = currentUser.role; 
 
-        const proceedToApp = async (role: string) => {
-          // DÜZELTME BURADA: currentUser verisini 4. parametre olarak store'a gönderiyoruz
-          await login(accessToken, refreshToken, role as any, currentUser);
+const proceedToApp = async (role: string) => {
+          let sessionRole = role;
 
-          if (role === 'ROLE_SELLER') {
-            if (isBuyer) {
-              router.replace('/(buyer)/home');
-            } else {
-              router.replace('/(seller)/dashboard');
-            }
-          } else if (role === 'ROLE_BUYER') {
-            if (!isBuyer) {
-              Alert.alert(
-                "Access Denied",
-                "You only have a Buyer account. Redirecting you to the Buyer portal.",
-                [{ text: "OK", onPress: () => router.replace('/(buyer)/home') }]
-              );
-            } else {
-              router.replace('/(buyer)/home');
-            }
+          // 1. If a Seller logs in via the Buyer tab, set their active UI session to BUYER
+          if (role === 'ROLE_SELLER' && isBuyer) {
+            sessionRole = 'ROLE_BUYER';
+          } 
+          // 2. If a normal Buyer tries to log in via the Seller tab, deny and correct them
+          else if (role === 'ROLE_BUYER' && !isBuyer) {
+            Alert.alert(
+              "Access Denied",
+              "You only have a Buyer account. Redirecting you to the Buyer portal.",
+              [{ 
+                text: "OK", 
+                onPress: async () => {
+                  await login(accessToken, refreshToken, 'ROLE_BUYER', currentUser);
+                  router.replace('/(buyer)/home');
+                }
+              }]
+            );
+            return; // Stop execution here so we don't run the code below
+          }
+
+          // 3. Save the *Session Role* (not necessarily the backend role) to the phone's memory
+          await login(accessToken, refreshToken, sessionRole as any, currentUser);
+
+          // 4. Route based on the Session Role
+          if (sessionRole === 'ROLE_SELLER') {
+            router.replace('/(seller)/dashboard');
+          } else {
+            router.replace('/(buyer)/home');
           }
         };
 

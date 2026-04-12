@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   View, 
   Text, 
   ScrollView, 
   TextInput, 
   Pressable, 
-  Image 
+  Image,
+  ActivityIndicator
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { useProductStore } from '../../src/store/useProductStore';
 
 export default function BuyerHomeScreen() {
+  const router = useRouter();
+  const { products, isLoading, fetchProducts } = useProductStore();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const trendingProducts = products.slice(0, 5);
+
   return (
     <View className="flex-1 bg-buyer-surface">
       <ScrollView 
@@ -18,21 +30,25 @@ export default function BuyerHomeScreen() {
         className="px-4 md:px-8 pt-6"
       >
         
-        {/* 1. SEARCH BAR SECTION */}
         <View className="mb-8">
-          <View className="relative justify-center">
+          <Pressable 
+            className="relative justify-center"
+            onPress={() => router.push('/(buyer)/search')}
+          >
             <View className="absolute left-4 z-10">
               <MaterialIcons name="search" size={24} color="#737686" />
             </View>
-            <TextInput 
-              className="w-full bg-buyer-surface-container-highest rounded-xl py-4 pl-12 pr-4 text-buyer-on-surface font-medium"
-              placeholder="Search wholesale products, suppliers, or SKUs..."
-              placeholderTextColor="#737686"
-            />
-          </View>
+            <View pointerEvents="none">
+              <TextInput 
+                className="w-full bg-buyer-surface-container-highest rounded-xl py-4 pl-12 pr-4 text-buyer-on-surface font-medium"
+                placeholder="Search wholesale products, suppliers..."
+                placeholderTextColor="#737686"
+                editable={false} 
+              />
+            </View>
+          </Pressable>
         </View>
 
-        {/* 2. CATEGORY GRID */}
         <View className="mb-10">
           <View className="flex-row justify-between items-end mb-6">
             <View>
@@ -63,11 +79,6 @@ export default function BuyerHomeScreen() {
           </View>
         </View>
 
-
-
-
-
-        {/* 5. TRENDING NOW */}
         <View className="mb-4">
           <View className="flex-row justify-between items-center mb-6">
             <Text className="text-2xl font-extrabold text-buyer-primary tracking-tight">Trending Now</Text>
@@ -76,48 +87,68 @@ export default function BuyerHomeScreen() {
             </Pressable>
           </View>
 
-          <View className="space-y-4">
-            {[
-              { id: 1, name: 'Pro-Air Athletics', sku: 'PA-993-RED', price: '$28.50', moq: 24, time: '2-4', img: '21' },
-              { id: 2, name: 'Symphony Z-1 ANC', sku: 'SZ-ANC-BLK', price: '$42.00', moq: 10, time: '5-7', img: '36' },
-              { id: 3, name: 'Nordic Brew Set', sku: 'NB-SET-04', price: '$15.75', moq: 100, time: '3-5', img: '42' },
-            ].map((product) => (
-              <View key={product.id} className="bg-buyer-surface-container-lowest p-4 rounded-2xl flex-row items-center gap-4 shadow-sm shadow-black/5 mb-4">
-                <Image source={{ uri: `https://picsum.photos/id/${product.img}/150/150` }} className="w-20 h-20 rounded-xl bg-buyer-surface-container" />
+          {isLoading ? (
+            <View className="py-10 items-center justify-center">
+              <ActivityIndicator size="large" color="#004ac6" />
+            </View>
+          ) : trendingProducts.length === 0 ? (
+            <View className="py-10 items-center justify-center bg-buyer-surface-container-lowest rounded-xl border border-buyer-outline-variant/20">
+              <MaterialIcons name="inventory-2" size={48} color="#c3c6d7" />
+              <Text className="mt-4 font-bold text-buyer-on-surface-variant">No trending items yet.</Text>
+            </View>
+          ) : (
+            <View className="space-y-4">
+              {trendingProducts.map((product) => {
                 
-                <View className="flex-1">
-                  <View className="flex-row justify-between items-start">
-                    <View className="flex-1 mr-2">
-                      <Text className="font-bold text-base text-buyer-primary" numberOfLines={1}>{product.name}</Text>
-                      <Text className="text-[10px] font-bold text-buyer-outline mt-1">SKU: {product.sku}</Text>
-                    </View>
-                    <View className="items-end">
-                      <Text className="text-lg font-black text-buyer-on-surface">{product.price}</Text>
-                      <Text className="text-[9px] font-bold text-buyer-secondary uppercase">per unit</Text>
-                    </View>
-                  </View>
+                const hasPrices = product.tieredPrices && product.tieredPrices.length > 0;
+                const basePrice = hasPrices ? product.tieredPrices[0].unitPrice : 0.00;
+                const minOrder = hasPrices ? product.tieredPrices[0].minQuantity : 1;
 
-                  <View className="flex-row items-center gap-3 mt-3">
-                    <View className="flex-row items-center gap-1 bg-buyer-surface-container px-2 py-1 rounded">
-                      <MaterialIcons name="inventory" size={12} color="#434655" />
-                      <Text className="text-[10px] font-bold text-buyer-on-surface-variant">MOQ: {product.moq}</Text>
+                return (
+                  <Pressable 
+                    key={product.id} 
+                    onPress={() => router.push(`/product/${product.id}`)}
+                    className="bg-buyer-surface-container-lowest p-4 rounded-2xl flex-row items-center gap-4 shadow-sm shadow-black/5 mb-4 border border-buyer-outline-variant/10 active:bg-buyer-surface-container-lowest/80"
+                  >
+                    <Image 
+                      source={{ uri: `https://picsum.photos/seed/${product.id}/150/150` }} 
+                      className="w-20 h-20 rounded-xl bg-buyer-surface-container" 
+                    />
+                    
+                    <View className="flex-1">
+                      <View className="flex-row justify-between items-start">
+                        <View className="flex-1 mr-2">
+                          <Text className="font-bold text-base text-buyer-primary" numberOfLines={1}>{product.name}</Text>
+                          <Text className="text-[10px] font-bold text-buyer-outline mt-1">{product.shopName || 'Unknown Supplier'}</Text>
+                        </View>
+                        <View className="items-end">
+                          <Text className="text-lg font-black text-buyer-on-surface">${Number(basePrice).toFixed(2)}</Text>
+                          <Text className="text-[9px] font-bold text-buyer-secondary uppercase">per unit</Text>
+                        </View>
+                      </View>
+
+                      <View className="flex-row items-center gap-3 mt-3">
+                        <View className="flex-row items-center gap-1 bg-buyer-surface-container px-2 py-1 rounded">
+                          <MaterialIcons name="inventory" size={12} color="#434655" />
+                          <Text className="text-[10px] font-bold text-buyer-on-surface-variant">MOQ: {minOrder}</Text>
+                        </View>
+                        <View className="flex-row items-center gap-1 bg-buyer-surface-container px-2 py-1 rounded">
+                          <MaterialIcons name="local-shipping" size={12} color="#434655" />
+                          <Text className="text-[10px] font-bold text-buyer-on-surface-variant">In Stock: {product.stock}</Text>
+                        </View>
+                        <Pressable className="ml-auto p-1.5 bg-blue-50 rounded-full active:bg-blue-100">
+                          <MaterialIcons name="add-shopping-cart" size={18} color="#004ac6" />
+                        </Pressable>
+                      </View>
                     </View>
-                    <View className="flex-row items-center gap-1 bg-buyer-surface-container px-2 py-1 rounded">
-                      <MaterialIcons name="local-shipping" size={12} color="#434655" />
-                      <Text className="text-[10px] font-bold text-buyer-on-surface-variant">{product.time} Days</Text>
-                    </View>
-                    <Pressable className="ml-auto p-1.5 bg-blue-50 rounded-full active:bg-blue-100">
-                      <MaterialIcons name="add-shopping-cart" size={18} color="#004ac6" />
-                    </Pressable>
-                  </View>
-                </View>
-              </View>
-            ))}
-          </View>
+                  </Pressable>
+                );
+              })}
+            </View>
+          )}
         </View>
       </ScrollView>
 
-      {/* 6. FLOATING ACTION BUTTON (FAB) */}
       <Pressable 
         className="absolute bottom-24 right-6 w-14 h-14 bg-buyer-primary rounded-full flex items-center justify-center shadow-lg active:scale-95"
         style={{ elevation: 6, shadowColor: '#004ac6', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8 }}
