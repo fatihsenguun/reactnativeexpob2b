@@ -1,15 +1,12 @@
 import { create } from 'zustand';
 import { axiosClient } from '../api/axiosClient';
 
-
 export interface ShopInfo {
   id: string;
   name: string;
   email: string;
-
 }
 
-// 2. Define the Order Item
 export interface OrderItem {
   id: string;
   productId: string;
@@ -18,13 +15,12 @@ export interface OrderItem {
   subTotal: number;
 }
 
-// 3. Define the main Order exactly as it comes from DtoOrder
 export interface Order {
   id: string;
   orderNumber: string;
   buyerId: string;
-  buyerName: string;      // ADDED: Matches DTO
-  shop: ShopInfo;         // ADDED: Matches the nested DtoBusinessProfile
+  buyerName: string;      
+  shop: ShopInfo;         
   totalAmount: number;
   shippingFee: number;
   status: 'PENDING' | 'CONFIRMED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
@@ -37,7 +33,6 @@ interface OrderState {
   isLoading: boolean;
   error: string | null;
 
-  // Actions
   fetchOrders: (role: 'BUYER' | 'SELLER') => Promise<void>;
   createOrder: (orderData: any) => Promise<boolean>;
   updateOrderStatus: (orderId: string, newStatus: string) => Promise<boolean>;
@@ -48,10 +43,10 @@ export const useOrderStore = create<OrderState>((set, get) => ({
   isLoading: false,
   error: null,
 
-  // 1. Fetch Orders (based on Buyer or Seller role)
   fetchOrders: async (role) => {
     set({ isLoading: true, error: null });
     try {
+      // ✅ ADDED "s": /orders/my-purchases
       const endpoint = role === 'BUYER' ? '/orders/my-purchases' : '/orders/my-sales';
       const response = await axiosClient.get(endpoint);
       
@@ -60,19 +55,17 @@ export const useOrderStore = create<OrderState>((set, get) => ({
       }
     } catch (error: any) {
       console.error("Failed to fetch orders:", error);
-      // Extract the exact error message from your Spring Boot BaseException
       const errorMessage = error.response?.data?.errorMessage || error.message || "Failed to load orders";
       set({ error: errorMessage, isLoading: false });
     }
   },
 
-  // 2. Create New Order
   createOrder: async (orderData) => {
     set({ isLoading: true, error: null });
     try {
-      await axiosClient.post('/orders', orderData);
+      // ✅ ADDED "s": /orders/create
+      await axiosClient.post('/orders/create', orderData);
       
-      // If the order is created successfully, automatically refresh the buyer's order list
       await get().fetchOrders('BUYER');
       return true;
     } catch (error: any) {
@@ -83,13 +76,11 @@ export const useOrderStore = create<OrderState>((set, get) => ({
     }
   },
 
-  // 3. Update Order Status (Optimistic UI Update)
   updateOrderStatus: async (orderId, newStatus) => {
     try {
-      // Send the request to Spring Boot
+      // ✅ ADDED "s": /orders/
       await axiosClient.patch(`/orders/${orderId}/status`, { status: newStatus });
       
-      // Instantly update the specific order in the React Native state for a snappy UI
       set((state) => ({
         orders: state.orders.map((order) => 
           order.id === orderId ? { ...order, status: newStatus as any } : order
