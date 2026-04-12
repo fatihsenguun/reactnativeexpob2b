@@ -1,11 +1,13 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Platform, View, Image, Pressable } from 'react-native';
+import { Platform, View, Image, Pressable, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
+import { useCartStore } from '../../src/store/useCartStore';
 
 function BuyerHeader() {
   const insets = useSafeAreaInsets(); 
+  const router = useRouter();
+  const { items } = useCartStore(); // Pulling cart items to show the badge
 
   return (
     <View 
@@ -23,9 +25,26 @@ function BuyerHeader() {
         />
       </View>
       <View className="flex-row items-center gap-1">
-        <Pressable className="p-2 -mr-2 rounded-lg active:bg-buyer-surface-container-high transition-colors">
+        
+        <Pressable className="p-2 rounded-lg active:bg-buyer-surface-container-high transition-colors">
           <MaterialIcons name="notifications" size={24} color="#004ac6" />
         </Pressable>
+
+        {/* NEW CART ICON WITH BADGE */}
+        <Pressable 
+          onPress={() => router.push('/cart')}
+          className="p-2 -mr-2 rounded-lg active:bg-buyer-surface-container-high transition-colors relative"
+        >
+          <MaterialIcons name="shopping-cart" size={24} color="#004ac6" />
+          
+          {/* Only show the red badge if there is at least 1 item in the cart */}
+          {items.length > 0 && (
+            <View className="absolute top-1 right-0 bg-error w-4 h-4 rounded-full items-center justify-center border border-white">
+              <Text className="text-white text-[8px] font-bold">{items.length}</Text>
+            </View>
+          )}
+        </Pressable>
+
       </View>
     </View>
   );

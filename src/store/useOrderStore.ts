@@ -1,18 +1,22 @@
 import { create } from 'zustand';
 import { axiosClient } from '../api/axiosClient';
 
+// 1. Matches the exact JSON from your Spring Boot Backend
 export interface ShopInfo {
-  id: string;
-  name: string;
-  email: string;
+  companyName: string;
+  bio: string | null;
+  logoUrl: string | null;
+  website: string | null;
+  averageRating: number | null;
 }
 
+// 2. Added productName to match JSON
 export interface OrderItem {
   id: string;
   productId: string;
+  productName: string; 
   quantity: number;
   priceAtPurchase: number;
-  subTotal: number;
 }
 
 export interface Order {
@@ -22,7 +26,7 @@ export interface Order {
   buyerName: string;      
   shop: ShopInfo;         
   totalAmount: number;
-  shippingFee: number;
+  shippingFee?: number;
   status: 'PENDING' | 'CONFIRMED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
   createdAt: string;
   items: OrderItem[];
@@ -46,7 +50,6 @@ export const useOrderStore = create<OrderState>((set, get) => ({
   fetchOrders: async (role) => {
     set({ isLoading: true, error: null });
     try {
-      // ✅ ADDED "s": /orders/my-purchases
       const endpoint = role === 'BUYER' ? '/orders/my-purchases' : '/orders/my-sales';
       const response = await axiosClient.get(endpoint);
       
@@ -63,7 +66,6 @@ export const useOrderStore = create<OrderState>((set, get) => ({
   createOrder: async (orderData) => {
     set({ isLoading: true, error: null });
     try {
-      // ✅ ADDED "s": /orders/create
       await axiosClient.post('/orders/create', orderData);
       
       await get().fetchOrders('BUYER');
@@ -78,7 +80,6 @@ export const useOrderStore = create<OrderState>((set, get) => ({
 
   updateOrderStatus: async (orderId, newStatus) => {
     try {
-      // ✅ ADDED "s": /orders/
       await axiosClient.patch(`/orders/${orderId}/status`, { status: newStatus });
       
       set((state) => ({

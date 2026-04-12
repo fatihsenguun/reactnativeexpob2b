@@ -33,7 +33,6 @@ export default function CartScreen() {
         productId: item.id,
         quantity: item.cartQuantity
       }))
-      // Note: You can also pass shippingMethod and paymentMethod to your Spring Boot DTO here!
     };
 
     const success = await createOrder(orderData);
@@ -83,10 +82,12 @@ export default function CartScreen() {
           </Pressable>
           <Text className="font-bold text-lg text-buyer-on-surface">Checkout</Text>
         </View>
-        <View className="flex-row items-center">
-          <Text className="text-xl font-bold text-buyer-on-surface tracking-tighter">CORE</Text>
-          <Text className="text-xl font-bold text-buyer-primary tracking-tighter">WHOLESALE</Text>
-        </View>
+        
+        <Image 
+          source={require('../src/assets/logo1.png')} 
+          className="w-10 h-10" 
+          resizeMode="contain" 
+        />
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 160 }}>
@@ -134,13 +135,38 @@ export default function CartScreen() {
 
               <View className="flex-row justify-between items-center mt-4 pt-4 border-t border-buyer-outline-variant/10">
                 <View className="flex-row items-center bg-buyer-surface-container rounded-lg p-1">
-                  <Pressable onPress={() => updateQuantity(item.id, Math.max(1, item.cartQuantity - 1))} className="w-8 h-8 items-center justify-center bg-white rounded shadow-sm active:scale-90">
+                  
+                  {/* MINUS BUTTON */}
+                  <Pressable 
+                    onPress={() => updateQuantity(item.id, Math.max(1, item.cartQuantity - 1))} 
+                    className="w-8 h-8 items-center justify-center bg-white rounded shadow-sm active:scale-90"
+                  >
                     <MaterialIcons name="remove" size={16} color="#004ac6" />
                   </Pressable>
-                  <Text className="w-12 text-center font-bold text-buyer-on-surface">{item.cartQuantity}</Text>
-                  <Pressable onPress={() => updateQuantity(item.id, item.cartQuantity + 1)} className="w-8 h-8 items-center justify-center bg-white rounded shadow-sm active:scale-90">
-                    <MaterialIcons name="add" size={16} color="#004ac6" />
+                  
+                  {/* QUANTITY DISPLAY WITH MAX STOCK WARNING */}
+                  <View className="items-center w-16 relative justify-center">
+                    <Text className="text-center font-bold text-buyer-on-surface">{item.cartQuantity}</Text>
+                    {item.cartQuantity >= item.stock && (
+                       <Text className="text-[8px] text-error font-bold uppercase absolute -bottom-3.5">Max Stock</Text>
+                    )}
+                  </View>
+
+                  {/* PLUS BUTTON (PROTECTED BY STOCK) */}
+                  <Pressable 
+                    onPress={() => {
+                      if (item.cartQuantity < item.stock) {
+                        updateQuantity(item.id, Math.min(item.stock, item.cartQuantity + 1));
+                      } else {
+                        Alert.alert("Stock Limit Reached", `You cannot add more than ${item.stock} units of this item.`);
+                      }
+                    }} 
+                    className={`w-8 h-8 items-center justify-center rounded shadow-sm active:scale-90 ${item.cartQuantity >= item.stock ? 'bg-buyer-surface-container-low opacity-50' : 'bg-white'}`}
+                    disabled={item.cartQuantity >= item.stock}
+                  >
+                    <MaterialIcons name="add" size={16} color={item.cartQuantity >= item.stock ? "#737686" : "#004ac6"} />
                   </Pressable>
+
                 </View>
                 <Text className="text-lg font-black text-buyer-on-surface">${(item.lockedPrice * item.cartQuantity).toFixed(2)}</Text>
               </View>

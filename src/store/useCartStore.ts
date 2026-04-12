@@ -3,7 +3,7 @@ import { Product } from './useProductStore';
 
 export interface CartItem extends Product {
   cartQuantity: number;
-  lockedPrice: number; // The volume price based on the quantity they added
+  lockedPrice: number; 
 }
 
 interface CartState {
@@ -21,7 +21,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   addToCart: (product, quantity, price) => {
     const { items } = get();
 
-    // 🚨 B2B RULE: Enforce Single Shop per Order
+    // 🚨 1. B2B RULE: Enforce Single Shop per Order
     if (items.length > 0 && items[0].shopId !== product.shopId) {
       return { 
         success: false, 
@@ -29,14 +29,22 @@ export const useCartStore = create<CartState>((set, get) => ({
       };
     }
 
-    // Check if item already exists in cart
     const existingItem = items.find(item => item.id === product.id);
+    const newTotalQuantity = existingItem ? existingItem.cartQuantity + quantity : quantity;
+
+    // 🚨 2. STOCK GUARD: Prevent exceeding available inventory
+    if (newTotalQuantity > product.stock) {
+      return {
+        success: false,
+        message: `Cannot add ${quantity} units. Only ${product.stock} units are currently available in stock.`
+      };
+    }
 
     if (existingItem) {
       set({
         items: items.map(item => 
           item.id === product.id 
-            ? { ...item, cartQuantity: item.cartQuantity + quantity, lockedPrice: price }
+            ? { ...item, cartQuantity: newTotalQuantity, lockedPrice: price }
             : item
         )
       });
@@ -54,6 +62,8 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 
   updateQuantity: (productId, newQuantity) => {
+    // Note: We don't enforce stock limit here because the UI will prevent it, 
+    // but you could add a secondary check here if you want to be extra safe.
     set((state) => ({
       items: state.items.map(item => 
         item.id === productId ? { ...item, cartQuantity: newQuantity } : item

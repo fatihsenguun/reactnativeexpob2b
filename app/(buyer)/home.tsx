@@ -6,15 +6,18 @@ import {
   TextInput, 
   Pressable, 
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert // <-- 1. Added Alert
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useProductStore } from '../../src/store/useProductStore';
+import { useCartStore } from '../../src/store/useCartStore'; // <-- 2. Imported Cart Store
 
 export default function BuyerHomeScreen() {
   const router = useRouter();
   const { products, isLoading, fetchProducts } = useProductStore();
+  const { addToCart } = useCartStore(); // <-- 3. Initialize addToCart
 
   useEffect(() => {
     fetchProducts();
@@ -136,9 +139,25 @@ export default function BuyerHomeScreen() {
                           <MaterialIcons name="local-shipping" size={12} color="#434655" />
                           <Text className="text-[10px] font-bold text-buyer-on-surface-variant">In Stock: {product.stock}</Text>
                         </View>
-                        <Pressable className="ml-auto p-1.5 bg-blue-50 rounded-full active:bg-blue-100">
+                        
+                        {/* 4. NEW ADD TO CART LOGIC HERE */}
+                        <Pressable 
+                          className="ml-auto p-1.5 bg-blue-50 rounded-full active:bg-blue-100"
+                          onPress={() => {
+                            const result = addToCart(product, minOrder, basePrice);
+                            if (!result.success) {
+                              Alert.alert("Supplier Restriction", result.message);
+                            } else {
+                              Alert.alert("Added to Cart", `${product.name} is ready for checkout!`, [
+                                { text: "Keep Shopping", style: "cancel" },
+                                { text: "Go to Cart", onPress: () => router.push('/cart') }
+                              ]);
+                            }
+                          }}
+                        >
                           <MaterialIcons name="add-shopping-cart" size={18} color="#004ac6" />
                         </Pressable>
+                        
                       </View>
                     </View>
                   </Pressable>
